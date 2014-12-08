@@ -19,3 +19,6 @@ mkdir terraform-cf
 cd terraform-cf
 terraform apply github.com/intel-data/terraform-aws-intel
 ```
+
+
+See terraform.tfvars-example for an example answer file.
