@@ -22,6 +22,19 @@ variable "aws_centos_ami" {
     }
 }
 
+variable "aws_ubuntu_ami" {
+    default = {
+        us-east-1 = "ami-98aa1cf0"
+        us-west-1 = "ami-736e6536"
+        us-west-2 = "ami-37501207"
+        ap-northeast-1 = "ami-df4b60de"
+        ap-southeast-1 = "ami-2ce7c07e"
+        ap-southeast-2 = "ami-1f117325"
+        eu-west-1 = "ami-f6b11181"
+        sa-east-1 = "ami-71d2676c"
+    }
+}
+
 variable "hadoop_instance_count" {
         default = "5"
 }
