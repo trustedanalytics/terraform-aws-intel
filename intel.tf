@@ -54,7 +54,7 @@ resource "aws_instance" "bastion" {
   provisioner "remote-exec" {
     inline = [
         "chmod +x /home/ubuntu/provision.sh",
-        "/home/ubuntu/provision.sh ${var.aws_access_key} ${var.aws_secret_key} ${var.aws_region} ${module.vpc.aws_vpc_id} ${module.vpc.aws_subnet_microbosh_id} ${var.network} ${module.cf.aws_eip_cf_public_ip} ${module.cf.aws_subnet_cfruntime-2a_id} ${module.cf.aws_subnet_cfruntime-2a_availability_zone} ${aws_instance.bastion.availability_zone} ${aws_instance.bastion.id} ${module.vpc.aws_subnet_lb_id} ${module.cf.aws_security_group_cf_name}",
+        "/home/ubuntu/provision.sh ${var.aws_access_key} ${var.aws_secret_key} ${var.aws_region} ${module.vpc.aws_vpc_id} ${module.vpc.aws_subnet_microbosh_id} ${var.network} ${module.cf.aws_eip_cf_public_ip} ${module.cf.aws_subnet_cfruntime-2a_id} ${module.cf.aws_subnet_cfruntime-2a_availability_zone} ${aws_instance.bastion.availability_zone} ${aws_instance.bastion.id} ${module.cf.aws_subnet_lb_id} ${module.cf.aws_security_group_cf_name}",
     ]
   }
 
@@ -68,7 +68,7 @@ module "cloudera" {
   aws_key_path = "${var.aws_key_path}"
   aws_access_key = "${var.aws_access_key}"
   aws_secret_key = "${var.aws_secret_key}"
-  aws_vpc = "${module.vpc.aws_vpc_id}"
+  aws_vpc_id = "${module.vpc.aws_vpc_id}"
   aws_route_table_private_id = "${module.vpc.aws_route_table_private_id}"
   aws_subnet_bastion = "${module.vpc.bastion_subnet}"
   hadoop_instance_count = "${var.hadoop_instance_count}" 

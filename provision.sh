@@ -102,13 +102,13 @@ provider:
 address:
   vpc_id: ${VPC}
   subnet_id: ${BOSH_SUBNET}
-  ip: ${IPMASK}.2.4
+  ip: ${IPMASK}.1.4
 EOF
 
 bosh-bootstrap deploy
 
 # We've hardcoded the IP of the microbosh machine, because convenience
-bosh -n target https://${IPMASK}.2.4:25555
+bosh -n target https://${IPMASK}.1.4:25555
 bosh login admin admin
 popd
 
