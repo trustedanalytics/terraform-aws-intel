@@ -8,6 +8,9 @@ variable "aws_region" {
 variable "network" {
 	default = "10.10"
 }
+variable "cf_admin_pass" {
+  default = "c1oudc0wc1oudc0w"
+}
 
 variable "aws_centos_ami" {
     default = {

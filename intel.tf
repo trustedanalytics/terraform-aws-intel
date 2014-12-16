@@ -27,6 +27,7 @@ module "cf" {
   aws_route_table_public_id = "${module.vpc.aws_route_table_public_id}"
   aws_route_table_private_id = "${module.vpc.aws_route_table_private_id}"
   aws_subnet_lb_availability_zone = "${module.vpc.aws_subnet_bastion_availability_zone}"
+  cf_admin_pass = "${var.cf_admin_pass}"
 }
 
 resource "aws_instance" "bastion" {
