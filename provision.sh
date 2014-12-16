@@ -14,6 +14,7 @@ BASTION_AZ=${10}
 BASTION_ID=${11}
 LB_SUBNET=${12}
 CF_SG=${13}
+CF_ADMIN_PASS=${14}
 
 # Prepare the jumpbox to be able to install ruby and git-based bosh and cf repos
 cd $HOME
@@ -133,12 +134,14 @@ DIRECTOR_UUID=$(bundle exec bosh status | grep UUID | awk '{print $2}')
 /bin/sed -i "s/SUBNET_ID/${CF_SUBNET}/g" deployments/cf-aws-vpc.yml
 /bin/sed -i "s/DIRECTOR_UUID/${DIRECTOR_UUID}/g" deployments/cf-aws-vpc.yml
 /bin/sed -i "s/CF_DOMAIN/${CF_IP}.xip.io/g" deployments/cf-aws-vpc.yml
+/bin/sed -i "s/CF_ADMIN_PASS/${CF_ADMIN_PASS}/g" deployments/cf-aws-vpc.yml
 
 /bin/sed -i "s/IPMASK/${IPMASK}/g" templates/cf-aws-networking.yml
 /bin/sed -i "s/CF_SG/${CF_SG}/g" templates/cf-aws-networking.yml
 /bin/sed -i "s/IPMASK/${IPMASK}/g" templates/cf-use-haproxy.yml
 /bin/sed -i "s/CF_SG/${CF_SG}/g" templates/cf-use-haproxy.yml
 /bin/sed -i "s/LB_SUBNET/${LB_SUBNET}/g" templates/cf-use-haproxy.yml
+/bin/sed -i "s/CF_ADMIN_PASS/${CF_ADMIN_PASS}/g" templates/cf-test-errands.yml
 
 # Upload the bosh release, set the deployment, and execute
 bundle exec bosh upload release https://community-shared-boshreleases.s3.amazonaws.com/boshrelease-cf-194.tgz
