@@ -20,7 +20,7 @@ variable "aws_centos_ami" {
         ap-northeast-1 = "ami-9392dc92"
         ap-southeast-1 = "ami-dcbeed8e"
         ap-southeast-2 = "ami-89e88db3"
-        eu-west-1 = "ami-af6faad8"
+        eu-west-1 = "ami-2ce30f5b"
         sa-east-1 = "ami-73ee416e"
     }
 }
