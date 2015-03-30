@@ -16,11 +16,11 @@ variable "aws_centos_ami" {
     default = {
         us-east-1 = "ami-00a11e68"
         us-west-1 = "ami-ba3c3bff"
-        us-west-2 = "ami-3425be04"
+        us-west-2 = "ami-11125e21"
         ap-northeast-1 = "ami-9392dc92"
         ap-southeast-1 = "ami-dcbeed8e"
         ap-southeast-2 = "ami-89e88db3"
-        eu-west-1 = "ami-2ce30f5b"
+        eu-west-1 = "ami-04a00d73"
         sa-east-1 = "ami-73ee416e"
     }
 }
@@ -38,9 +38,10 @@ variable "aws_ubuntu_ami" {
     }
 }
 
-variable "hadoop_instance_count" {
+variable "hadoop_worker_count" {
         default = "5"
 }
 variable "hadoop_instance_type" {
         default = "m3.2xlarge"
 }
+variable "ansible_repo_path" {}
