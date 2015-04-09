@@ -1,5 +1,9 @@
 # terraform-aws-vpc
 
+### Description
+
+This creates a manager vm with floating ip and n number of vms that can be used for slave. This creates keypair and assumes that internal network is already created. After that, ansible scripts from the platform-ansible repo should be used to provision a running CDH instance.
+
 This is part of a project that aims to create the infrastructure necessary for
 Cloud Foundry to be installed. For reasons of modularity, it does not install CF
 or microbosh itself. You *probably* don't want to use this repo directly.

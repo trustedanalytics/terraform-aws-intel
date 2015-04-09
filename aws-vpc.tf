@@ -8,8 +8,23 @@ resource "aws_vpc" "default" {
 	cidr_block = "${var.network}.0.0/16"
 	enable_dns_hostnames = "true"
 	tags {
+		Project = "${element(split(\",\",var.aws_tags),0)}"
+		IAP = "${element(split(\",\",var.aws_tags),1)}"
+		Environment = "${element(split(\",\",var.aws_tags),2)}"
 		Name = "${var.aws_vpc_name}"
 	}
+}
+
+output "tags.Project" {
+	value = "${aws_vpc.default.tags.Project}"
+}
+
+output "tags.IAP" {
+	value = "${aws_vpc.default.tags.IAP}"
+}
+
+output "tags.Environment" {
+	value = "${aws_vpc.default.tags.Environment}"
 }
 
 output "aws_vpc_id" {
@@ -18,6 +33,11 @@ output "aws_vpc_id" {
 
 resource "aws_internet_gateway" "default" {
 	vpc_id = "${aws_vpc.default.id}"
+	tags {
+		Project = "${aws_vpc.default.tags.Project}"
+		IAP = "${aws_vpc.default.tags.IAP}"
+		Environment = "${aws_vpc.default.tags.Environment}"
+	}
 }
 
 output "aws_internet_gateway_id" {
@@ -89,6 +109,12 @@ resource "aws_security_group" "nat" {
 	}
 
 	tags {
+		Project = "${aws_vpc.default.tags.Project}"
+		IAP = "${aws_vpc.default.tags.IAP}"
+		Environment = "${aws_vpc.default.tags.Environment}"
+	}
+
+	tags {
 		Name = "${var.aws_vpc_name}-nat"
 	}
 
@@ -102,6 +128,11 @@ resource "aws_instance" "nat" {
 	subnet_id = "${aws_subnet.bastion.id}"
 	associate_public_ip_address = true
 	source_dest_check = false
+	tags {
+		Project = "${aws_vpc.default.tags.Project}"
+		IAP = "${aws_vpc.default.tags.IAP}"
+		Environment = "${aws_vpc.default.tags.Environment}"
+	}
 	tags {
 		Name = "nat"
 	}
@@ -117,6 +148,11 @@ resource "aws_eip" "nat" {
 resource "aws_subnet" "bastion" {
 	vpc_id = "${aws_vpc.default.id}"
 	cidr_block = "${var.network}.0.0/24"
+	tags {
+		Project = "${aws_vpc.default.tags.Project}"
+		IAP = "${aws_vpc.default.tags.IAP}"
+		Environment = "${aws_vpc.default.tags.Environment}"
+	}
 	tags {
 		Name = "${var.aws_vpc_name}-bastion"
 	}
@@ -139,6 +175,11 @@ resource "aws_route_table" "public" {
 		cidr_block = "0.0.0.0/0"
 		gateway_id = "${aws_internet_gateway.default.id}"
 	}
+	tags {
+		Project = "${aws_vpc.default.tags.Project}"
+		IAP = "${aws_vpc.default.tags.IAP}"
+		Environment = "${aws_vpc.default.tags.Environment}"
+	}
 }
 
 output "aws_route_table_public_id" {
@@ -157,6 +198,11 @@ resource "aws_subnet" "microbosh" {
 	cidr_block = "${var.network}.1.0/24"
 	availability_zone = "${aws_subnet.bastion.availability_zone}"
 	tags {
+		Project = "${aws_vpc.default.tags.Project}"
+		IAP = "${aws_vpc.default.tags.IAP}"
+		Environment = "${aws_vpc.default.tags.Environment}"
+	}
+	tags {
 		Name = "${var.aws_vpc_name}-microbosh"
 	}
 }
@@ -173,6 +219,11 @@ resource "aws_route_table" "private" {
 	route {
 		cidr_block = "0.0.0.0/0"
 		instance_id = "${aws_instance.nat.id}"
+	}
+	tags {
+		Project = "${aws_vpc.default.tags.Project}"
+		IAP = "${aws_vpc.default.tags.IAP}"
+		Environment = "${aws_vpc.default.tags.Environment}"
 	}
 }
 
@@ -223,6 +274,12 @@ resource "aws_security_group" "bastion" {
 		to_port = 0
 		protocol = "-1"
 		cidr_blocks = ["0.0.0.0/0"]
+	}
+
+	tags {
+		Project = "${aws_vpc.default.tags.Project}"
+		IAP = "${aws_vpc.default.tags.IAP}"
+		Environment = "${aws_vpc.default.tags.Environment}"
 	}
 
 	tags {
