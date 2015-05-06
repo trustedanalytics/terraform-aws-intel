@@ -26,7 +26,8 @@ module "cloudera" {
   aws_vpc_id = "${module.cf-install.aws_vpc_id}"
   aws_route_table_private_id = "${module.cf-install.aws_route_table_private_id}"
   aws_subnet_bastion = "${module.cf-install.aws_subnet_bastion}"
-  hadoop_worker_count = "${var.hadoop_worker_count}" 
-  hadoop_instance_type = "${var.hadoop_instance_type}" 
+  hadoop_worker_count = "${var.hadoop_worker_count}"
+  hadoop_instance_type = "${var.hadoop_instance_type}"
   ansible_repo_path = "${var.ansible_repo_path}"
+	security_group = "${module.cf-install.cf_sg}"
 }
