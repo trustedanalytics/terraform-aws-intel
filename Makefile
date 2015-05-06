@@ -1,6 +1,9 @@
-.PHONY: all plan apply destroy
+.PHONY: all update plan apply destroy provision
 
-all: plan apply
+all: update plan apply provision
+
+update:
+	./bin/update
 
 plan:
 	terraform get -update
@@ -17,3 +20,6 @@ clean:
 	rm -f terraform.tfplan
 	rm -f terraform.tfstate
 	rm -fR .terraform/
+
+provision:
+	./bin/provision

@@ -1,0 +1,9 @@
+[submodule "cf-install"]
+	path = cf-install
+	url = git@github.com:cloudfoundry-community/terraform-aws-cf-install.git
+[submodule "ansible-cdh"]
+	path = ansible-cdh
+	url = git@github.com:intel-data/ansible-cdh.git
+[submodule "cdh"]
+	path = cdh
+	url = git@github.com:intel-data/terraform-aws-cdh.git

@@ -45,3 +45,7 @@ variable "hadoop_instance_type" {
         default = "m3.2xlarge"
 }
 variable "ansible_repo_path" {}
+
+variable "cf_boshworkspace_version" {
+  default = "v1.1.4"
+}
