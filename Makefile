@@ -1,6 +1,9 @@
-.PHONY: all plan apply destroy provision ssh
+.PHONY: all update plan apply destroy provision
 
-all: plan apply provision
+all: update plan apply provision
+
+update:
+	./bin/update
 
 plan:
 	terraform get -update
@@ -19,11 +22,4 @@ clean:
 	rm -fR .terraform/
 
 provision:
-	./provision/prepare-provision
-	./provision/provision-ssh
-
-ssh:
-	./provision/bastion-ssh
-
-test:
-	./scripts/testPlan
+	./bin/provision
