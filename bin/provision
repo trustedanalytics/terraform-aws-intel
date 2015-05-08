@@ -1,0 +1,6 @@
+#!/bin/bash
+
+pushd cf-install
+export STATE_FILE="../terraform.tfstate"
+make provision
+popd
