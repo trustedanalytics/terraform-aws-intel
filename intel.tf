@@ -13,6 +13,7 @@ module "cf-install" {
   aws_region = "${var.aws_region}"
   aws_key_path = "${var.aws_key_path}"
   cf_admin_pass = "c1oudc0w"
+	install_docker_services = "${var.install_docker_services}"
 }
 
 module "cloudera" {
