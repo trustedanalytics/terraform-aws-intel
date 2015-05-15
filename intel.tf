@@ -12,9 +12,10 @@ module "cf-install" {
   aws_secret_key = "${var.aws_secret_key}"
   aws_region = "${var.aws_region}"
   aws_key_path = "${var.aws_key_path}"
-  cf_admin_pass = "c1oudc0w"
+  cf_admin_pass = "${var.cf_admin_pass}"
   install_docker_services = "${var.install_docker_services}"
   cf_size = "${var.cf_size}"
+  aws_tags = "${var.aws_tags}"
 }
 
 module "cloudera" {
@@ -33,9 +34,10 @@ module "cloudera" {
   hadoop_instance_type = "${var.hadoop_instance_type}"
   ansible_repo_path = "${var.ansible_repo_path}"
   security_group = "${module.cf-install.cf_sg_id}"
+  tags_IAP = "${module.cf-install.tags.IAP}"
+  tags_Project = "${module.cf-install.tags.Project}"
+  tags_Environment = "${module.cf-install.tags.Environment}"
 }
-
-
 
 output "aws_access_key" {
 	value = "${module.cf-install.aws_access_key}"

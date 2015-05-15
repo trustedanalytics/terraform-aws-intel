@@ -1,7 +1,13 @@
 aws_access_key = "XXXXXXXXXXXXXX"
 aws_secret_key = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
-aws_key_path = "/Users/dbishop/.ssh/example.pem"
+aws_key_path = "~/.ssh/cf-example.pem"
 aws_key_name = "cf-example"
 aws_region = "us-west-1"
 network = "10.10"
-ansible_repo_path = "/home/test/ansible-cdh/"
+cf_admin_pass = "XXXXXXXXXXXXX"
+cf_size = "tiny"
+hadoop_worker_count = "5"
+hadoop_instance_type = "m3.2xlarge"
+# tag values, key order: Project,IAP,Environment
+aws_tags = "Foo Bar,00000,Development"
+
