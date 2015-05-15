@@ -8,9 +8,7 @@ variable "aws_region" {
 variable "network" {
 	default = "10.10"
 }
-variable "cf_admin_pass" {
-  default = "c1oudc0wc1oudc0w"
-}
+variable "cf_admin_pass" {}
 
 variable "aws_centos_ami" {
     default = {
@@ -41,10 +39,14 @@ variable "aws_ubuntu_ami" {
 variable "hadoop_worker_count" {
         default = "5"
 }
+
 variable "hadoop_instance_type" {
         default = "m3.2xlarge"
 }
-variable "ansible_repo_path" {}
+
+variable "ansible_repo_path" {
+        default = "ansible-dp2"
+}
 
 variable "cf_boshworkspace_version" {
   default = "v1.1.4"
@@ -53,3 +55,13 @@ variable "cf_boshworkspace_version" {
 variable "install_docker_services" {
   default = "false"
 }
+
+variable "cf_size" {
+  default = "tiny"
+}
+
+# tag values, key order: Project,IAP,Environment
+variable "aws_tags" {
+  default = "Foo Bar,00000,Development"
+}
+
