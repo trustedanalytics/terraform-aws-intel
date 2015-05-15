@@ -13,7 +13,8 @@ module "cf-install" {
   aws_region = "${var.aws_region}"
   aws_key_path = "${var.aws_key_path}"
   cf_admin_pass = "c1oudc0w"
-	install_docker_services = "${var.install_docker_services}"
+  install_docker_services = "${var.install_docker_services}"
+  cf_size = "${var.cf_size}"
 }
 
 module "cloudera" {
@@ -25,13 +26,13 @@ module "cloudera" {
   aws_access_key = "${var.aws_access_key}"
   aws_secret_key = "${var.aws_secret_key}"
   aws_vpc_id = "${module.cf-install.aws_vpc_id}"
-	aws_region = "${var.aws_region}"
+  aws_region = "${var.aws_region}"
   aws_route_table_private_id = "${module.cf-install.aws_route_table_private_id}"
   aws_subnet_bastion = "${module.cf-install.aws_subnet_bastion}"
   hadoop_worker_count = "${var.hadoop_worker_count}"
   hadoop_instance_type = "${var.hadoop_instance_type}"
   ansible_repo_path = "${var.ansible_repo_path}"
-	security_group = "${module.cf-install.cf_sg_id}"
+  security_group = "${module.cf-install.cf_sg_id}"
 }
 
 
