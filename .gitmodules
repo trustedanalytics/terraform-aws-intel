@@ -1,6 +1,6 @@
 [submodule "cf-install"]
 	path = cf-install
-	url = git@github.com:cloudfoundry-community/terraform-aws-cf-install.git
+	url = git@github.com:intel-data/terraform-aws-cf-install.git
 [submodule "ansible-dp2"]
 	path = ansible-dp2
 	url = git@github.com:intel-data/ansible-dp2.git
