@@ -34,6 +34,7 @@ variable "aws_ubuntu_ami" {
         ap-northeast-1 = "ami-df4b60de"
         ap-southeast-1 = "ami-2ce7c07e"
         ap-southeast-2 = "ami-1f117325"
+        eu-central-1 = "ami-423c0a5f"
         eu-west-1 = "ami-f6b11181"
         sa-east-1 = "ami-71d2676c"
     }
@@ -47,7 +48,14 @@ variable "aws_centos_ami" {
         ap-northeast-1 = "ami-9392dc92"
         ap-southeast-1 = "ami-dcbeed8e"
         ap-southeast-2 = "ami-89e88db3"
+        eu-central-1 = "ami-e4d6ecf9"
         eu-west-1 = "ami-af6faad8"
         sa-east-1 = "ami-73ee416e"
     }
 }
+
+variable "tags_Project" {}
+
+variable "tags_IAP" {}
+
+variable "tags_Environment" {}
