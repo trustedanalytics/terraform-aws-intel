@@ -1,7 +1,9 @@
+# vim: ts=2:tw=78: et:
+
 provider "aws" {
-	access_key = "${var.aws_access_key}"
-	secret_key = "${var.aws_secret_key}"
-	region = "${var.aws_region}"
+  access_key = "${var.aws_access_key}"
+  secret_key = "${var.aws_secret_key}"
+  region = "${var.aws_region}"
 }
 
 module "cf-install" {
@@ -40,7 +42,7 @@ module "cloudera" {
 }
 
 output "aws_access_key" {
-	value = "${module.cf-install.aws_access_key}"
+  value = "${module.cf-install.aws_access_key}"
 }
 
 output "aws_secret_key" {
