@@ -48,9 +48,6 @@ variable "ansible_repo_path" {
         default = "ansible-dp2"
 }
 
-variable "cf_boshworkspace_version" {
-  default = "v1.1.4"
-}
 
 variable "install_docker_services" {
   default = "false"
@@ -65,3 +62,12 @@ variable "aws_tags" {
   default = "Foo Bar,00000,Development"
 }
 
+variable "cf_boshworkspace_version" {
+  default = "v1.1.9"
+}
+variable "cf_release_version" {
+  default = "210"
+}
+variable "deployment_size" {
+ default = "small"
+}
