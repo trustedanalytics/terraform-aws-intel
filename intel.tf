@@ -21,6 +21,7 @@ module "cf-install" {
   deployment_size = "${var.deployment_size}"
   cf_release_version = "${var.cf_release_version}"
   cf_boshworkspace_version = "${var.cf_boshworkspace_version}"
+  debug = "${var.debug}"
 }
 
 module "cloudera" {
@@ -178,3 +179,7 @@ output "api_z2_count"      { value = "${module.cf-install.api_z2_count}" }
 output "services_z2_count" { value = "${module.cf-install.services_z2_count}" }
 output "health_z2_count"   { value = "${module.cf-install.health_z2_count}" }
 output "runner_z2_count"   { value = "${module.cf-install.runner_z2_count}" }
+
+output "debug" {
+	value = "${module.cf-install.debug}"
+}

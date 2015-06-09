@@ -71,3 +71,7 @@ variable "cf_release_version" {
 variable "deployment_size" {
  default = "small"
 }
+
+variable "debug" {
+ default = "false"
+}
