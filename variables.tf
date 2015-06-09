@@ -63,10 +63,10 @@ variable "aws_tags" {
 }
 
 variable "cf_boshworkspace_version" {
-  default = "v1.1.9"
+  default = "cf-207"
 }
 variable "cf_release_version" {
-  default = "210"
+  default = "207"
 }
 variable "deployment_size" {
  default = "small"
