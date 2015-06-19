@@ -186,5 +186,5 @@ output "debug" {
 }
 
 output "private_cf_domains" {
-  value = "{$module.cf-install.private_cf_domains}"
+  value = "${module.cf-install.private_cf_domains}"
 }
