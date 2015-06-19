@@ -65,3 +65,20 @@ variable "aws_tags" {
   default = "Foo Bar,00000,Development"
 }
 
+variable "cf_boshworkspace_version" {
+  default = "cf-207"
+}
+variable "cf_release_version" {
+  default = "207"
+}
+variable "deployment_size" {
+ default = "small"
+}
+
+variable "debug" {
+ default = "false"
+}
+
+variable "private_cf_domains" {
+ default = ""
+}

@@ -18,6 +18,11 @@ module "cf-install" {
   install_docker_services = "${var.install_docker_services}"
   cf_size = "${var.cf_size}"
   aws_tags = "${var.aws_tags}"
+  deployment_size = "${var.deployment_size}"
+  cf_release_version = "${var.cf_release_version}"
+  cf_boshworkspace_version = "${var.cf_boshworkspace_version}"
+  debug = "${var.debug}"
+  private_cf_domains = "${var.private_cf_domains}"
 }
 
 module "cloudera" {
@@ -159,4 +164,27 @@ output "cf_admin_pass" {
 
 output "aws_key_path" {
   value = "${module.cf-install.aws_key_path}"
+}
+
+output "cf_release_version" {
+	value = "${module.cf-install.cf_release_version}"
+}
+
+output "backbone_z1_count" { value = "${module.cf-install.backbone_z1_count}" }
+output "api_z1_count"      { value = "${module.cf-install.api_z1_count}" }
+output "services_z1_count" { value = "${module.cf-install.services_z1_count}" }
+output "health_z1_count"   { value = "${module.cf-install.health_z1_count}" }
+output "runner_z1_count"   { value = "${module.cf-install.runner_z1_count}" }
+output "backbone_z2_count" { value = "${module.cf-install.backbone_z2_count}" }
+output "api_z2_count"      { value = "${module.cf-install.api_z2_count}" }
+output "services_z2_count" { value = "${module.cf-install.services_z2_count}" }
+output "health_z2_count"   { value = "${module.cf-install.health_z2_count}" }
+output "runner_z2_count"   { value = "${module.cf-install.runner_z2_count}" }
+
+output "debug" {
+	value = "${module.cf-install.debug}"
+}
+
+output "private_cf_domains" {
+  value = "{$module.cf-install.private_cf_domains}"
 }
