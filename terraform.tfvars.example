@@ -10,4 +10,30 @@ hadoop_worker_count = "5"
 hadoop_instance_type = "m3.2xlarge"
 # tag values, key order: Project,IAP,Environment
 aws_tags = "Foo Bar,00000,Development"
-install_docker_services = "true"
+
+# Control the version of CF to be deployed
+#cf_release_version="207"
+
+# Control the version of the CF boshworkspace
+#cf_boshworkspace_version="v1.1.9"
+
+# Control the domain for base CF:
+#cf_domain="XIP" # Use "XIP" for an xip.io based domain, or provide your own domain here
+
+# Prevent Host Header spoofing from hitting internal APIs:
+#private_cf_domains="my.internal"
+
+# Control the cloudfoundry deployment size
+# Values are 'small', 'med', 'med-ha', and 'big-ha'
+# See https://github.com/cloudfoundry-community/terraform-openstack-cf-install/blob/master/variables.tf for how
+# those sizes inform instance counts
+#deployment_size="small"
+
+#Change CloudFoundry's admin password:
+#cf_admin_pass="mysupersecretpassword"
+
+# Should I install docker?
+#install_docker_services="true"
+
+# Should I install logsearch?
+#install_logsearch="false"

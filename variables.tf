@@ -64,4 +64,3 @@ variable "cf_size" {
 variable "aws_tags" {
   default = "Foo Bar,00000,Development"
 }
-
