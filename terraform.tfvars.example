@@ -25,7 +25,7 @@ aws_tags = "Foo Bar,00000,Development"
 
 # Control the cloudfoundry deployment size
 # Values are 'small', 'med', 'med-ha', and 'big-ha'
-# See https://github.com/cloudfoundry-community/terraform-openstack-cf-install/blob/master/variables.tf for how
+# See https://github.com/cloudfoundry-community/terraform-aws-cf-install/blob/master/variables.tf for how
 # those sizes inform instance counts
 #deployment_size="small"
 
