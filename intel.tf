@@ -1,3 +1,18 @@
+# Copyright (c) 2015 Intel Corporation
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+
 # vim: ts=2:tw=78: et:
 
 provider "aws" {
@@ -18,6 +33,10 @@ module "cf-install" {
   install_docker_services = "${var.install_docker_services}"
   cf_size = "${var.cf_size}"
   aws_tags = "${var.aws_tags}"
+  deployment_size = "${var.deployment_size}"
+  cf_release_version = "${var.cf_release_version}"
+  cf_boshworkspace_version = "${var.cf_boshworkspace_version}"
+  debug = "${var.debug}"
 }
 
 module "cloudera" {
@@ -159,4 +178,23 @@ output "cf_admin_pass" {
 
 output "aws_key_path" {
   value = "${module.cf-install.aws_key_path}"
+}
+
+output "cf_release_version" {
+	value = "${module.cf-install.cf_release_version}"
+}
+
+output "backbone_z1_count" { value = "${module.cf-install.backbone_z1_count}" }
+output "api_z1_count"      { value = "${module.cf-install.api_z1_count}" }
+output "services_z1_count" { value = "${module.cf-install.services_z1_count}" }
+output "health_z1_count"   { value = "${module.cf-install.health_z1_count}" }
+output "runner_z1_count"   { value = "${module.cf-install.runner_z1_count}" }
+output "backbone_z2_count" { value = "${module.cf-install.backbone_z2_count}" }
+output "api_z2_count"      { value = "${module.cf-install.api_z2_count}" }
+output "services_z2_count" { value = "${module.cf-install.services_z2_count}" }
+output "health_z2_count"   { value = "${module.cf-install.health_z2_count}" }
+output "runner_z2_count"   { value = "${module.cf-install.runner_z2_count}" }
+
+output "debug" {
+	value = "${module.cf-install.debug}"
 }
