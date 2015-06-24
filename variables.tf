@@ -90,3 +90,7 @@ variable "deployment_size" {
 variable "debug" {
  default = "false"
 }
+
+variable "private_cf_domains" {
+ default = ""
+}

@@ -37,6 +37,7 @@ module "cf-install" {
   cf_release_version = "${var.cf_release_version}"
   cf_boshworkspace_version = "${var.cf_boshworkspace_version}"
   debug = "${var.debug}"
+  private_cf_domains = "${var.private_cf_domains}"
 }
 
 module "cloudera" {
@@ -197,4 +198,8 @@ output "runner_z2_count"   { value = "${module.cf-install.runner_z2_count}" }
 
 output "debug" {
 	value = "${module.cf-install.debug}"
+}
+
+output "private_cf_domains" {
+  value = "${module.cf-install.private_cf_domains}"
 }
