@@ -38,6 +38,7 @@ module "cf-install" {
   cf_boshworkspace_version = "${var.cf_boshworkspace_version}"
   debug = "${var.debug}"
   private_cf_domains = "${var.private_cf_domains}"
+  additional_cf_sg_allow_1 = "${module.cloudera.aws_cdh_cidr}"
 }
 
 module "cloudera" {
@@ -202,4 +203,8 @@ output "debug" {
 
 output "private_cf_domains" {
   value = "${module.cf-install.private_cf_domains}"
+}
+
+output "additional_cf_sg_allows" {
+  value = "${module.cf-install.additional_cf_sg_allows}"
 }
