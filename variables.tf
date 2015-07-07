@@ -91,6 +91,10 @@ variable "debug" {
  default = "false"
 }
 
+variable "gh_auth" {
+ default = ""
+}
+
 variable "private_cf_domains" {
  default = ""
 }
