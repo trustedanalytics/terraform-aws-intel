@@ -37,3 +37,6 @@ aws_tags = "Foo Bar,00000,Development"
 
 # Should I install logsearch?
 #install_logsearch="false"
+
+# Optionally pass user and token for access to github.com
+#gh_auth="user:token"
