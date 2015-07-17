@@ -15,7 +15,7 @@ aws_tags = "Foo Bar,00000,Development"
 #cf_release_version="207"
 
 # Control the version of the CF boshworkspace
-#cf_boshworkspace_version="v1.1.9"
+#cf_boshworkspace_version="v1.1.15"
 
 # Control the domain for base CF:
 #cf_domain="XIP" # Use "XIP" for an xip.io based domain, or provide your own domain here
