@@ -60,7 +60,7 @@ variable "hadoop_instance_type" {
 }
 
 variable "ansible_repo_path" {
-        default = "ansible-dp2"
+        default = "platform-ansible"
 }
 
 
