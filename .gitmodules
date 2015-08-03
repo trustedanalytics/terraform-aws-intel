@@ -1,9 +1,9 @@
 [submodule "cf-install"]
 	path = cf-install
-	url = git@github.com:intel-data/terraform-aws-cf-install.git
+	url = git@github.com:trustedanalytics/terraform-aws-cf-install.git
 [submodule "platform-ansible"]
 	path = platform-ansible
-	url = git@github.com:intel-data/platform-ansible.git
+	url = git@github.com:trustedanalytics/platform-ansible.git
 [submodule "cdh"]
 	path = cdh
-	url = git@github.com:intel-data/terraform-aws-cdh.git
+	url = git@github.com:trustedanalytics/terraform-aws-cdh.git

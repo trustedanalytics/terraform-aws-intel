@@ -19,7 +19,7 @@ An AWS SSH Key need to be created in desired region prior to running the followi
 ```bash
 mkdir terraform-cf
 cd terraform-cf
-terraform apply github.com/intel-data/terraform-aws-intel
+terraform apply github.com/trustedanalytics/terraform-aws-intel
 ```
 
 See terraform.tfvars.example for an example answer file.
