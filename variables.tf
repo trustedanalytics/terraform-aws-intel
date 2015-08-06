@@ -24,6 +24,7 @@ variable "network" {
 	default = "10.10"
 }
 variable "cf_admin_pass" {}
+variable "cf_domain" {}
 
 variable "aws_centos_ami" {
     default = {
