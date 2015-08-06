@@ -36,6 +36,7 @@ module "cf-install" {
   deployment_size = "${var.deployment_size}"
   cf_release_version = "${var.cf_release_version}"
   cf_boshworkspace_version = "${var.cf_boshworkspace_version}"
+  cf_domain = "${var.cf_domain}"
   debug = "${var.debug}"
   private_cf_domains = "${var.private_cf_domains}"
   additional_cf_sg_allow_1 = "${module.cloudera.aws_cdh_cidr}"
