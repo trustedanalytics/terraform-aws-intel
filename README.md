@@ -1,13 +1,7 @@
 # terraform-aws-intel
 
-### Description
+This project aims to create one click deploy for Cloud Foundry and Cloudera in AWS VPC.
 
-This project aims to create one click deploy for Cloud Foundry and Cloudera in
-AWS VPC. This is for Intel internal use.
-
-### Branches
-
-*intel/master* is the default branch. There is no *master* branch, since there is no upstream.
 
 ## Deploy Cloud Foundry
 

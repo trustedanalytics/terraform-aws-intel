@@ -201,10 +201,6 @@ output "debug" {
 	value = "${module.cf-install.debug}"
 }
 
-output "gh_auth" {
-  value = "${var.gh_auth}"
-}
-
 output "private_cf_domains" {
   value = "${module.cf-install.private_cf_domains}"
 }
