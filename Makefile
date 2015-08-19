@@ -31,3 +31,4 @@ clean:
 
 provision:
 	pushd cf-install; export STATE_FILE="../terraform.tfstate"; make provision; popd
+	scripts/get_ips.sh
