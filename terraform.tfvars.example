@@ -13,6 +13,7 @@ network = "10.10"
 cf_size = "tiny"
 hadoop_worker_count = "3"
 hadoop_instance_type = "m3.xlarge"
+env_name = "trustedanalytics"
 
 # tag values, key order: Project,IAP,Environment
 aws_tags = "Foo Bar,00000,Development"
