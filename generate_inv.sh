@@ -18,6 +18,7 @@
 # Generate an ansible inventory based on the terraform status
 # and upload it to the cloudera bastion host
 FILE="cdh-inventory"
+ENV_FILE="env.yml"
 TERRASHOW="terraform show -no-color -module-depth=2"
 ANSIBLE_PATH="./platform-ansible"
 
@@ -35,28 +36,30 @@ function extract_public_dns {
   tshow_resource_property aws_instance.${1} public_dns
 }
 
+function show_env_name {
+  $TERRASHOW | awk '/env_name/ { print $3 }'
+}
+
 AWS_KEY_PATH=$(eval echo `awk '/aws_key_path/{gsub(/"/,"");print $3}' terraform.tfvars`)
 REGION=$(awk '/aws_region/{gsub(/"/,"");print $3}' terraform.tfvars)
 REGION_DOMAIN=$(tshow_resource_property aws_instance.cdh-manager private_dns |cut -f2- -d.)
 
 rm $FILE
+rm $ENV_FILE
 
 for name in cdh-worker cdh-manager cdh-master consul-master cloudera-launcher zabbix-proxy; do
   echo "[$name]" >> $FILE
-  grep -q "use_custom_dns: true" ${ANSIBLE_PATH}/defaults/env.yml 2> /dev/null
-  if [[ $? -eq 0 ]]; then
-    ENVNAME=$(awk '/env_name/ { print $2 }' ${ANSIBLE_PATH}/defaults/env.yml)
-    extract_private_ip $name | awk "{ printf(\"${name}-%d.node.${ENVNAME}.consul ansible_ssh_host=%s\n\", NR-1, \$1); }" >> $FILE
-  else
-    extract_private_ip $name | awk "{ bak=\$1; gsub(\"\\\\.\", \"-\", \$1); printf(\"ip-%s.${REGION_DOMAIN} ansible_ssh_host=%s\n\", \$1, bak);  }" >> $FILE
-  fi
+  extract_private_ip $name | awk "{ printf(\"${name}-%d.node.$(show_env_name).consul ansible_ssh_host=%s\n\", NR-1, \$1); }" >> $FILE
   echo >> $FILE
 done
 
 echo -e "[cdh-all-nodes:children]\ncdh-master\ncdh-worker" >> $FILE
 echo -e "[cdh-all:children]\ncdh-all-nodes\ncdh-manager" >> $FILE
 
+echo -e "env_name: $(show_env_name)" >> $ENV_FILE
+echo -e "use_custom_dns: true" >> $ENV_FILE
+
 DNS=$(extract_public_dns cloudera-launcher)
 scp -i "${AWS_KEY_PATH}" -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no $FILE ec2-user@$DNS:~/ansible-cdh/inventory/cdh
+scp -i "${AWS_KEY_PATH}" -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no $ENV_FILE ec2-user@$DNS:~/ansible-cdh/defaults/env.yml
 ssh -i "${AWS_KEY_PATH}" -t -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -A ec2-user@$DNS -L 7180:$(extract_private_ip cdh-manager):7180
-#export ANSIBLE_HOST_KEY_CHECKING=False; cd ansible-cdh; ansible-playbook site.yml -f 10 -i inventory/cdh -sv
