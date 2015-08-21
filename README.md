@@ -8,7 +8,7 @@ This project aims to create one click deploy for Cloud Foundry and Cloudera in A
 The one step that isn't automated is the creation of SSH keys. Waiting for feature to be added to terraform.
 An AWS SSH Key need to be created in desired region prior to running the following commands.
 
-**NOTE**: You **must** being using at least terraform 0.3.6 for this to work.
+**NOTE**: You **must** be using at least terraform 0.3.6 for this to work. It is recommended to use latest supported version: 0.5.3.
 
 ```bash
 mkdir terraform-cf
