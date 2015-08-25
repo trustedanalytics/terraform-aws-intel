@@ -183,6 +183,11 @@ resource "aws_instance" "cloudera-launcher" {
     source = "${path.module}/provision.sh"
     destination = "/home/ec2-user/provision.sh"
   }
+  
+  provisioner "file" {
+    source = "${var.aws_key_path}"
+    destination = "/home/ec2-user/.ssh/id_rsa"
+  }
 
   provisioner "file" {
     source = "${var.ansible_repo_path}"
