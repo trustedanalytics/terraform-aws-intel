@@ -182,7 +182,7 @@ resource "aws_instance" "cloudera-launcher" {
   }
 
   tags {
-    Name = "cdh-launcher"
+    Name = "cloudera-launcher"
   }
 
   connection {

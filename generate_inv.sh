@@ -32,7 +32,7 @@ function extract_private_ip {
   tshow_resource_property aws_instance.${1} private_ip
 }
 
-function extract_public_dns { 
+function extract_public_dns {
   tshow_resource_property aws_instance.${1} public_dns
 }
 
