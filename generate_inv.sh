@@ -47,7 +47,7 @@ REGION_DOMAIN=$(tshow_resource_property aws_instance.cdh-manager private_dns |cu
 rm $FILE
 rm $ENV_FILE
 
-for name in cdh-worker cdh-manager cdh-master consul-master cloudera-launcher zabbix-proxy; do
+for name in cdh-worker cdh-manager cdh-master consul-master cloudera-launcher; do
   echo "[$name]" >> $FILE
   extract_private_ip $name | awk "{ printf(\"${name}-%d.node.$(show_env_name).consul ansible_ssh_host=%s\n\", NR-1, \$1); }" >> $FILE
   echo >> $FILE

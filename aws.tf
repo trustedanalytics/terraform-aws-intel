@@ -144,32 +144,6 @@ resource "aws_instance" "cdh-worker" {
 
 }
 
-resource "aws_instance" "zabbix-proxy" {
-  ami = "${lookup(var.aws_centos_ami, var.aws_region)}"
-  instance_type = "t2.small"
-  key_name = "${var.aws_key_name}"
-  associate_public_ip_address = false
-  security_groups = ["${var.security_group}"]
-  subnet_id = "${aws_subnet.cloudera.id}"
-
-  ebs_block_device {
-    device_name = "/dev/sda1"
-    volume_size = "10"
-    volume_type = "gp2"
-  }
-
-  tags {
-    Project = "${var.tags_Project}"
-    IAP = "${var.tags_IAP}"
-    Environment = "${var.tags_Environment}"
-  }
-
-  tags {
-   Name = "zabbix-proxy"
-  }
-
-}
-
 resource "aws_instance" "cloudera-launcher" {
   ami = "${lookup(var.aws_centos_ami, var.aws_region)}"
   instance_type = "t2.small"
