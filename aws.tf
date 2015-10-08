@@ -194,3 +194,7 @@ resource "aws_instance" "cloudera-launcher" {
 output "aws_cdh_cidr" {
   value = "${aws_subnet.cloudera.cidr_block}"
 }
+
+output "consul_masters" {
+  value = "${module.consul.consul_masters}"
+}
