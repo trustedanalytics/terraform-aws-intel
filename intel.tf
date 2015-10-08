@@ -212,3 +212,7 @@ output "additional_cf_sg_allows" {
 output "consul_masters" {
   value = "${module.cloudera.consul_masters}"
 }
+
+output "env_name" {
+  value = "${var.env_name}"
+}

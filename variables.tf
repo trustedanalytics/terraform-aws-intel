@@ -96,3 +96,7 @@ variable "debug" {
 variable "private_cf_domains" {
  default = ""
 }
+
+variable "env_name" {
+  default = "trustedanalytics"
+}
