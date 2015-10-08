@@ -208,3 +208,7 @@ output "private_cf_domains" {
 output "additional_cf_sg_allows" {
   value = "${module.cf-install.additional_cf_sg_allows}"
 }
+
+output "consul_masters" {
+  value = "${module.cloudera.consul_masters}"
+}
