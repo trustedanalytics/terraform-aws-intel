@@ -66,8 +66,11 @@ variable "ansible_repo_path" {
         default = "platform-ansible"
 }
 
-
 variable "install_docker_services" {
+  default = "false"
+}
+
+variable "install_logsearch" {
   default = "false"
 }
 

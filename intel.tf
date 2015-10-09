@@ -217,3 +217,15 @@ output "consul_masters" {
 output "env_name" {
   value = "${var.env_name}"
 }
+
+output "install_logsearch" {
+  value = "${var.install_logsearch}"
+}
+
+output "ls_subnet1" {
+  value = "${module.cf-install.ls_subnet1}"
+}
+
+output "ls_subnet1_az" {
+  value = "${module.cf-install.ls_subnet1_az}"
+}
