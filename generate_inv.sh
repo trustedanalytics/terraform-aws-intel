@@ -62,4 +62,8 @@ echo -e "use_custom_dns: true" >> $ENV_FILE
 DNS=$(extract_public_dns cloudera-launcher)
 scp -i "${AWS_KEY_PATH}" -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no $FILE ec2-user@$DNS:~/ansible-cdh/inventory/cdh
 scp -i "${AWS_KEY_PATH}" -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no $ENV_FILE ec2-user@$DNS:~/ansible-cdh/defaults/env.yml
-ssh -i "${AWS_KEY_PATH}" -t -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -A ec2-user@$DNS -L 7180:$(extract_private_ip cdh-manager):7180
+
+#don't ssh if started with --nossh
+if [[ x"$1" != x"--nossh" ]]; then  
+  ssh -i "${AWS_KEY_PATH}" -t -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -A ec2-user@$DNS -L 7180:$(extract_private_ip cdh-manager):7180
+fi
