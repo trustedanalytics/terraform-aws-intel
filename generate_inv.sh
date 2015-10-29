@@ -44,10 +44,9 @@ AWS_KEY_PATH=$(eval echo `awk '/aws_key_path/{gsub(/"/,"");print $3}' terraform.
 REGION=$(awk '/aws_region/{gsub(/"/,"");print $3}' terraform.tfvars)
 REGION_DOMAIN=$(tshow_resource_property aws_instance.cdh-manager private_dns |cut -f2- -d.)
 
-rm $FILE
-rm $ENV_FILE
+rm -f $FILE $ENV_FILE
 
-for name in cdh-worker cdh-manager cdh-master consul-master cloudera-launcher; do
+for name in cdh-worker cdh-manager cdh-master consul-master cloudera-launcher db-lb mysql-cluster_backup mysql-cluster_db; do
   echo "[$name]" >> $FILE
   extract_private_ip $name | awk "{ printf(\"${name}-%d.node.$(show_env_name).consul ansible_ssh_host=%s\n\", NR-1, \$1); }" >> $FILE
   echo >> $FILE
@@ -55,6 +54,7 @@ done
 
 echo -e "[cdh-all-nodes:children]\ncdh-master\ncdh-worker" >> $FILE
 echo -e "[cdh-all:children]\ncdh-all-nodes\ncdh-manager" >> $FILE
+echo -e "[mysql-cluster_db_all:children]\nmysql-cluster_backup\nmysql-cluster_db" >> $FILE
 
 echo -e "env_name: $(show_env_name)" >> $ENV_FILE
 echo -e "use_custom_dns: true" >> $ENV_FILE
@@ -64,6 +64,6 @@ scp -i "${AWS_KEY_PATH}" -o UserKnownHostsFile=/dev/null -o StrictHostKeyCheckin
 scp -i "${AWS_KEY_PATH}" -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no $ENV_FILE ec2-user@$DNS:~/ansible-cdh/defaults/env.yml
 
 #don't ssh if started with --nossh
-if [[ x"$1" != x"--nossh" ]]; then  
+if [[ x"$1" != x"--nossh" ]]; then
   ssh -i "${AWS_KEY_PATH}" -t -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -A ec2-user@$DNS -L 7180:$(extract_private_ip cdh-manager):7180
 fi

@@ -16,4 +16,4 @@
 
 chmod 600 ~/.ssh/id_rsa
 sudo rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm
-sudo yum install git ansible tmux -y
+sudo yum install git ansible screen tmux -y
