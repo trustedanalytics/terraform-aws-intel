@@ -34,7 +34,7 @@ install_logsearch="false"
 # Expert only! Do not change if unsure
 
 # Control the version of CF to be deployed
-cf_release_version="211"
+cf_release_version="212"
 
 # Control the version of the CF boshworkspace
 cf_boshworkspace_version="master"
