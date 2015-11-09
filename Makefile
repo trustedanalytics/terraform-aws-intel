@@ -10,7 +10,7 @@ update:
 	git submodule sync
 	git submodule foreach --recursive 'git submodule sync; git clean -d --force --force'
 	# Update submodule content, checkout if necessary
-	git submodule update --init --recursive --force
+	git submodule update --init --recursive
 	git clean -ffd
 
 plan:
