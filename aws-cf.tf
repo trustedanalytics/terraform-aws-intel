@@ -219,6 +219,20 @@ resource "aws_security_group" "cf" {
     self = "true"
   }
 
+  ingress {
+    cidr_blocks = ["${var.network}.0.0/16"]
+    from_port = "53"
+    to_port = "53"
+    protocol = "tcp"
+  }
+
+  ingress {
+    cidr_blocks = ["${var.network}.0.0/16"]
+    from_port = "53"
+    to_port = "53"
+    protocol = "udp"
+  }
+
   egress {
     from_port = 0
     to_port = 0
