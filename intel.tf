@@ -30,6 +30,7 @@ module "cf-install" {
   aws_region = "${var.aws_region}"
   aws_key_path = "${var.aws_key_path}"
   cf_admin_pass = "${var.cf_admin_pass}"
+  cf_client_pass = "${var.cf_client_pass}"
   install_docker_services = "${var.install_docker_services}"
   cf_size = "${var.cf_size}"
   aws_tags = "${var.aws_tags}"
@@ -177,6 +178,10 @@ output "aws_subnet_bastion_availability_zone" {
 
 output "cf_admin_pass" {
   value = "${module.cf-install.cf_admin_pass}"
+}
+
+output "cf_client_pass" {
+  value = "${var.cf_client_pass}"
 }
 
 output "aws_key_path" {
