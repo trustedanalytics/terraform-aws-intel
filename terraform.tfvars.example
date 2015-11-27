@@ -38,6 +38,9 @@ deployment_size="small"
 install_docker_services="true"
 install_logsearch="false"
 
+# Should we use offline buildpack for java?
+#offline_java_buildpack="true"
+
 # Expert only! Do not change if unsure
 
 # Control the version of CF to be deployed

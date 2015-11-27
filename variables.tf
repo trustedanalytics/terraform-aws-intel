@@ -81,6 +81,10 @@ variable "cf_size" {
   default = "tiny"
 }
 
+variable "offline_java_buildpack" {
+  default = "true"
+}
+
 # tag values, key order: Project,IAP,Environment
 variable "aws_tags" {
   default = "Foo Bar,00000,Development"
