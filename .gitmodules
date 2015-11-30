@@ -7,3 +7,6 @@
 [submodule "cf-install"]
 	path = cf-install
 	url = https://github.com/trustedanalytics/terraform-aws-cf-install.git
+[submodule "mysql-cluster"]
+	path = mysql-cluster
+	url = https://github.com/trustedanalytics/terraform-aws-mysql-cluster.git

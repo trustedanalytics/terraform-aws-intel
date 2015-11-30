@@ -24,12 +24,11 @@ variable "network" {
 	default = "10.10"
 }
 variable "cf_admin_pass" {}
-
 variable "cf_domain" {}
-
 variable "cf_client_pass" {
   default = "c1oudc0w"
 }
+
 variable "aws_centos_ami" {
     default = {
         us-east-1 = "ami-00a11e68"

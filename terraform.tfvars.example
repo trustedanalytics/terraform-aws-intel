@@ -4,6 +4,7 @@ aws_access_key = "YOUR-AWS-KEY"
 aws_secret_key = "YOUR-AWS-SECRET"
 cf_admin_pass = "PUT-YOUR-PASSWORD-HERE"
 cf_client_pass = "PUT-YOUR-CF-PASSWORD-HERE"
+
 # Default values, may be changed if needed
 
 aws_key_path = "~/.ssh/bosh.pem"

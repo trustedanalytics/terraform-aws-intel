@@ -68,6 +68,121 @@ module "cloudera" {
   tags_Environment = "${module.cf-install.tags.Environment}"
 }
 
+resource "aws_subnet" "db-lb" {
+  vpc_id = "${module.cf-install.aws_vpc_id}"
+  cidr_block = "${var.network}.20.0/24"
+  tags {
+    Environment = "${module.cf-install.tags.Environment}"
+    IAP = "${module.cf-install.tags.IAP}"
+    Name = "db-lb"
+    Project = "${module.cf-install.tags.Project}"
+  }
+}
+
+resource "aws_route_table_association" "db-lb_private" {
+  subnet_id = "${aws_subnet.db-lb.id}"
+  route_table_id = "${module.cf-install.aws_route_table_private_id}"
+}
+
+resource "aws_security_group" "db-lb" {
+  name = "sg_db-lb"
+  description = "Allow traffic to db-cluster loadbalancer"
+  vpc_id = "${module.cf-install.aws_vpc_id}"
+  tags {
+    Environment = "${module.cf-install.tags.Environment}"
+    IAP = "${module.cf-install.tags.IAP}"
+    Name = "db-lb"
+    Project = "${module.cf-install.tags.Project}"
+  }
+  ingress {
+    from_port = 22
+    to_port = 22
+    protocol = "tcp"
+    cidr_blocks = ["${var.network}.0.0/24"]
+  }
+  ingress {
+    from_port = 0
+    to_port = 65535
+    protocol = "tcp"
+    cidr_blocks = ["${var.network}.3.0/24", "${var.network}.4.0/24", "${var.network}.0.0/24"]
+  }
+  ingress {
+    from_port = 0
+    to_port = 65535
+    protocol = "udp"
+    cidr_blocks = ["${var.network}.3.0/24", "${var.network}.4.0/24", "${var.network}.0.0/24"]
+  }
+  ingress {
+    from_port = -1
+    to_port = -1
+    protocol = "icmp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+  ingress {
+    from_port = 0
+    to_port = 65535
+    protocol = "tcp"
+    self = "true"
+  }
+  ingress {
+    from_port = 0
+    to_port = 65535
+    protocol = "udp"
+    self = "true"
+  }
+  egress {
+    from_port = 0
+    to_port = 0
+    protocol = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+}
+
+resource "aws_instance" "db-lb" {
+  count = "${var.db-lb_instance_count}"
+  ami = "${lookup(var.aws_centos_ami, var.aws_region)}"
+  instance_type = "${var.db-lb_instance_type}"
+  key_name = "${var.aws_key_name}"
+  associate_public_ip_address = false
+  security_groups = ["${aws_security_group.db-lb.id}"]
+  subnet_id = "${aws_subnet.db-lb.id}"
+  ebs_block_device {
+    device_name = "/dev/sda1"
+    volume_size = "10"
+    volume_type = "gp2"
+  }
+  tags {
+    Environment = "${module.cf-install.tags.Environment}"
+    IAP = "${module.cf-install.tags.IAP}"
+    Name = "db-lb-${count.index}"
+    Project = "${module.cf-install.tags.Project}"
+  }
+}
+
+module "mysql-cluster" {
+  source = "./mysql-cluster"
+  network = "${var.network}"
+  aws_centos_ami = "${var.aws_centos_ami}"
+  aws_key_name = "${var.aws_key_name}"
+  aws_access_key = "${var.aws_access_key}"
+  aws_secret_key = "${var.aws_secret_key}"
+  aws_vpc_id = "${module.cf-install.aws_vpc_id}"
+  aws_region = "${var.aws_region}"
+  aws_route_table_private_id = "${module.cf-install.aws_route_table_private_id}"
+  bastion_subnet_cidr = "${var.network}.0.0/24"
+  cf_subnet_a_cidr = "${var.network}.3.0/24"
+  cf_subnet_b_cidr = "${var.network}.4.0/24"
+  db-lb_cidr = "${aws_subnet.db-lb.cidr_block}"
+  mysql-cluster_backup_fs_size = "${var.mysql-cluster_backup_fs_size}"
+  mysql-cluster_backup_instance_type = "${var.mysql-cluster_backup_instance_type}"
+  mysql-cluster_db_fs_size = "${var.mysql-cluster_db_fs_size}"
+  mysql-cluster_db_instance_type = "${var.mysql-cluster_db_instance_type}"
+  mysql-cluster_size = "${var.mysql-cluster_size}"
+  tags_IAP = "${module.cf-install.tags.IAP}"
+  tags_Project = "${module.cf-install.tags.Project}"
+  tags_Environment = "${module.cf-install.tags.Environment}"
+}
+
 output "aws_access_key" {
   value = "${module.cf-install.aws_access_key}"
 }
@@ -290,6 +405,7 @@ output "os_timeout" {
 output "git_account_url" {
   value = "${module.cf-install.git_account_url}"
 }
+
 output "gh_auth" {
   value  = "${module.cf-install.gh_auth}"
 }
