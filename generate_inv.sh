@@ -59,6 +59,11 @@ echo -e "[mysql-cluster_db_all:children]\nmysql-cluster_backup\nmysql-cluster_db
 echo -e "env_name: $(show_env_name)" >> $ENV_FILE
 echo -e "use_custom_dns: true" >> $ENV_FILE
 
+echo "#ip addresses of management vms" >> $FILE
+for name in bastion nat;do
+  echo "#${name}: $(extract_private_ip $name)" >> $FILE
+done
+
 DNS=$(extract_public_dns cloudera-launcher)
 scp -i "${AWS_KEY_PATH}" -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no $FILE ec2-user@$DNS:~/ansible-cdh/inventory/cdh
 scp -i "${AWS_KEY_PATH}" -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no $ENV_FILE ec2-user@$DNS:~/ansible-cdh/defaults/env.yml
