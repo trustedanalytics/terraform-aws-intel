@@ -140,10 +140,14 @@ variable "git_account_url" {
   default = "github.com/trustedanalytics"
 }
 
-variable "git_account_url" {
-  default = "github.com/trustedanalytics"
+variable "gh_auth" {
+  default = ""
 }
 
-variable "gh_auth" {
+variable "quay_username" {
+  default = ""
+}
+
+variable "quay_pass" {
   default = ""
 }

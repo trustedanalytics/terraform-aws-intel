@@ -409,3 +409,11 @@ output "git_account_url" {
 output "gh_auth" {
   value  = "${module.cf-install.gh_auth}"
 }
+
+output "quay_username" {
+  value = "${var.quay_username}"
+}
+
+output "quay_pass" {
+  value = "${var.quay_pass}"
+}
