@@ -234,3 +234,47 @@ output "ls_subnet1" {
 output "ls_subnet1_az" {
   value = "${module.cf-install.ls_subnet1_az}"
 }
+
+output "aws_security_group_db-lb_id" {
+  value = "${aws_security_group.db-lb.id}"
+}
+
+output "aws_security_group_db-lb_name" {
+  value = "${aws_security_group.db-lb.name}"
+}
+
+output "aws_subnet_db-lb_cidr" {
+  value = "${aws_subnet.db-lb.cidr_block}"
+}
+
+output "aws_instance_db-lb_ids" {
+  value = "${join(" ", aws_instance.db-lb.*.id)}"
+}
+
+output "aws_security_group_mysql-cluster_db_id" {
+  value = "${module.mysql-cluster.aws_security_group_mysql-cluster_db_id}"
+}
+
+output "aws_security_group_mysql-cluster_db_name" {
+  value = "${module.mysql-cluster.aws_security_group_mysql-cluster_db_name}"
+}
+
+output "aws_subnet_mysql-cluster_db_cidr" {
+  value = "${module.mysql-cluster.aws_subnet_mysql-cluster_db_cidr}"
+}
+
+output "aws_instance_mysql-cluster_backup_ids" {
+  value = "${module.mysql-cluster.aws_instance_mysql-cluster_backup_ids}"
+}
+
+output "aws_instance_mysql-cluster_db_ids" {
+  value = "${module.mysql-cluster.aws_instance_mysql-cluster_db_ids}"
+}
+
+output "aws_security_group_cf_id" {
+  value = "${module.cf-install.aws_security_group_cf_id}"
+}
+
+output "offline_java_buildpack" {
+  value = "${module.cf-install.offline_java_buildpack}"
+}
