@@ -38,3 +38,16 @@ cf_release_version="212"
 
 # Control the version of the CF boshworkspace
 cf_boshworkspace_version="master"
+
+# Optional parameters of db lb
+#db-lb_instance_count="0"
+#db-lb_instance_type="m3.medium"
+# Optional MySQL Percona XtraDB Galera cluster parameters with their defaults
+#mysql-cluster_size="none" #possible values: none, small
+#mysql-cluster_backup_fs_size="250"
+#mysql-cluster_backup_instance_type="m3.xlarge"
+#mysql-cluster_db_fs_size="100"
+#mysql-cluster_db_instance_type="r3.large"
+#
+# How long should we wait before timing out on openstack VM creation/deletion? (seconds)
+#os_timeout=1200

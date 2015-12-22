@@ -108,3 +108,27 @@ variable "private_cf_domains" {
 variable "env_name" {
   default = "trustedanalytics"
 }
+
+variable "db-lb_instance_count" {
+  default = "0"
+}
+variable "db-lb_instance_type" {
+  default = "m3.medium"
+}
+variable "mysql-cluster_backup_fs_size" {
+  default = "250"
+}
+variable "mysql-cluster_backup_instance_type" {
+  default = "m3.xlarge"
+}
+variable "mysql-cluster_db_fs_size" {
+  default = "100"
+}
+variable "mysql-cluster_db_instance_type" {
+  default = "r3.large"
+}
+variable "mysql-cluster_size" {
+  default = "none"
+}
+
+variable "os_timeout" { default = "1200" }

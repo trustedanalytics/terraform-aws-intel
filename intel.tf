@@ -41,6 +41,8 @@ module "cf-install" {
   debug = "${var.debug}"
   private_cf_domains = "${var.private_cf_domains}"
   additional_cf_sg_allow_1 = "${module.cloudera.aws_cdh_cidr}"
+  offline_java_buildpack = "${var.offline_java_buildpack}"
+  os_timeout = "${var.os_timeout}"
 }
 
 module "cloudera" {
@@ -278,3 +280,8 @@ output "aws_security_group_cf_id" {
 output "offline_java_buildpack" {
   value = "${module.cf-install.offline_java_buildpack}"
 }
+
+output "os_timeout" {
+  value = "${module.cf-install.os_timeout}"
+}
+
