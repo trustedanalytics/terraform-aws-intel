@@ -49,5 +49,5 @@ cf_boshworkspace_version="master"
 #mysql-cluster_db_fs_size="100"
 #mysql-cluster_db_instance_type="r3.large"
 #
-# How long should we wait before timing out on openstack VM creation/deletion? (seconds)
+# How long should we wait before timing out on AWS VM creation/deletion? (seconds)
 #os_timeout=1200
