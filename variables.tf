@@ -140,6 +140,10 @@ variable "git_account_url" {
   default = "github.com/trustedanalytics"
 }
 
+variable "git_account_url" {
+  default = "github.com/trustedanalytics"
+}
+
 variable "gh_auth" {
   default = ""
 }
