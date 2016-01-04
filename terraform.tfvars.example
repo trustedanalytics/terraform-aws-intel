@@ -15,6 +15,12 @@ hadoop_worker_count = "3"
 hadoop_instance_type = "m3.xlarge"
 env_name = "trustedanalytics"
 
+# Git account URL for accessing forked repos
+#git_account_url = "github.com/trustedanalytics" # without https:// and trailing /
+
+# Optionally pass user and token for access to github.com
+#gh_auth="user:token"
+
 # tag values, key order: Project,IAP,Environment
 aws_tags = "Foo Bar,00000,Development"
 cf_domain="XIP" # Use "XIP" for an xip.io based domain, or provide your own domain here

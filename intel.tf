@@ -43,6 +43,8 @@ module "cf-install" {
   additional_cf_sg_allow_1 = "${module.cloudera.aws_cdh_cidr}"
   offline_java_buildpack = "${var.offline_java_buildpack}"
   os_timeout = "${var.os_timeout}"
+  git_account_url = "${var.git_account_url}"
+  gh_auth = "${var.gh_auth}"
 }
 
 module "cloudera" {
@@ -285,3 +287,9 @@ output "os_timeout" {
   value = "${module.cf-install.os_timeout}"
 }
 
+output "git_account_url" {
+  value = "${module.cf-install.git_account_url}"
+}
+output "gh_auth" {
+  value  = "${module.cf-install.gh_auth}"
+}

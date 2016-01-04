@@ -132,3 +132,11 @@ variable "mysql-cluster_size" {
 }
 
 variable "os_timeout" { default = "1200" }
+
+variable "git_account_url" {
+  default = "github.com/trustedanalytics"
+}
+
+variable "gh_auth" {
+  default = ""
+}
