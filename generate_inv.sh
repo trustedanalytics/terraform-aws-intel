@@ -40,13 +40,17 @@ function show_env_name {
   $TERRASHOW | awk '/env_name/ { print $3 }'
 }
 
+function show_cf_domain {
+  $TERRASHOW | awk '/cf_domain/ { print $3 }' | sed '1!d'
+}
+
 AWS_KEY_PATH=$(eval echo `awk '/aws_key_path/{gsub(/"/,"");print $3}' terraform.tfvars`)
 REGION=$(awk '/aws_region/{gsub(/"/,"");print $3}' terraform.tfvars)
 REGION_DOMAIN=$(tshow_resource_property aws_instance.cdh-manager private_dns |cut -f2- -d.)
 
 rm -f $FILE $ENV_FILE
 
-for name in cdh-worker cdh-manager cdh-master consul-master cloudera-launcher db-lb mysql-cluster_backup mysql-cluster_db; do
+for name in cdh-worker cdh-manager cdh-master consul-master cloudera-launcher db-lb mysql-cluster_backup mysql-cluster_db nginx-master; do
   echo "[$name]" >> $FILE
   extract_private_ip $name | awk "{ printf(\"${name}-%d.node.$(show_env_name).consul ansible_ssh_host=%s\n\", NR-1, \$1); }" >> $FILE
   echo >> $FILE
@@ -57,7 +61,9 @@ echo -e "[cdh-all:children]\ncdh-all-nodes\ncdh-manager" >> $FILE
 echo -e "[mysql-cluster_db_all:children]\nmysql-cluster_backup\nmysql-cluster_db" >> $FILE
 
 echo -e "env_name: $(show_env_name)" >> $ENV_FILE
+echo -e "cf_domain: $(show_cf_domain)" >> $ENV_FILE
 echo -e "use_custom_dns: true" >> $ENV_FILE
+echo -e "self_signed_cert: true" >> $ENV_FILE
 
 echo "#ip addresses of management vms" >> $FILE
 for name in bastion nat;do
