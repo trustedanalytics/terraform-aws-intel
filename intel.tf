@@ -170,6 +170,7 @@ module "mysql-cluster" {
   aws_region = "${var.aws_region}"
   aws_route_table_private_id = "${module.cf-install.aws_route_table_private_id}"
   bastion_subnet_cidr = "${var.network}.0.0/24"
+  cdh_cidr = "${module.cloudera.aws_cdh_cidr}"
   cf_subnet_a_cidr = "${var.network}.3.0/24"
   cf_subnet_b_cidr = "${var.network}.4.0/24"
   db-lb_cidr = "${aws_subnet.db-lb.cidr_block}"
