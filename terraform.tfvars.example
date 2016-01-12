@@ -19,7 +19,7 @@ quay_username = ""
 quay_pass = ""
 
 # Git account URL for accessing forked repos
-#git_account_url = "github.com/trustedanalytics" # without https:// and trailing /
+#git_account_url="github.com/trustedanalytics" # without https:// and trailing /
 
 # Optionally pass user and token for access to github.com
 #gh_auth="user:token"
