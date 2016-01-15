@@ -104,13 +104,13 @@ resource "aws_security_group" "db-lb" {
     from_port = 0
     to_port = 65535
     protocol = "tcp"
-    cidr_blocks = ["${var.network}.3.0/24", "${var.network}.4.0/24", "${var.network}.0.0/24"]
+    cidr_blocks = ["${var.network}.3.0/24", "${var.network}.4.0/24", "${var.network}.0.0/24", "${module.cloudera.aws_cdh_cidr}"]
   }
   ingress {
     from_port = 0
     to_port = 65535
     protocol = "udp"
-    cidr_blocks = ["${var.network}.3.0/24", "${var.network}.4.0/24", "${var.network}.0.0/24"]
+    cidr_blocks = ["${var.network}.3.0/24", "${var.network}.4.0/24", "${var.network}.0.0/24", "${module.cloudera.aws_cdh_cidr}"]
   }
   ingress {
     from_port = -1
