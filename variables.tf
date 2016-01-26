@@ -90,7 +90,7 @@ variable "aws_tags" {
   default = "Foo Bar,00000,Development"
 }
 
-variable "cf_boshworkspace_version" {
+variable "cf_boshworkspace_branch" {
   default = "cf-207"
 }
 variable "cf_release_version" {

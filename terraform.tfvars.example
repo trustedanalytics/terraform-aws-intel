@@ -49,7 +49,7 @@ install_logsearch="false"
 cf_release_version="212"
 
 # Control the version of the CF boshworkspace
-cf_boshworkspace_version="TAP-2016-JAN-2"
+cf_boshworkspace_branch="TAP-2016-JAN-2"
 
 # Optional parameters of db lb
 #db-lb_instance_count="0"

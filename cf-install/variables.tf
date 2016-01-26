@@ -57,7 +57,7 @@ variable "cf_domain" {
   default = "XIP"
 }
 
-variable "cf_boshworkspace_version" {
+variable "cf_boshworkspace_branch" {
   default = "v1.1.12"
 }
 

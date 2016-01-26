@@ -28,7 +28,7 @@ LB_SUBNET1=${14}
 CF_SG=${15}
 CF_ADMIN_PASS=${16}
 CF_DOMAIN=${17}
-CF_BOSHWORKSPACE_VERSION=${18}
+CF_BOSHWORKSPACE_BRANCH=${18}
 CF_SIZE=${19}
 DOCKER_SUBNET=${20}
 INSTALL_DOCKER=${21}
@@ -235,9 +235,9 @@ popd
 # configs in a git repo
 if [[ ! -d "$HOME/workspace/deployments/cf-boshworkspace" ]]; then
   if [ -n "$GH_AUTH" ]; then
-    git clone --branch  ${CF_BOSHWORKSPACE_VERSION} https://${GH_AUTH}@${GIT_ACCOUNT_URL}/cf-boshworkspace.git
+    git clone --branch  ${CF_BOSHWORKSPACE_BRANCH} https://${GH_AUTH}@${GIT_ACCOUNT_URL}/cf-boshworkspace.git
   else
-    git clone --branch  ${CF_BOSHWORKSPACE_VERSION} https://${GIT_ACCOUNT_URL}/cf-boshworkspace.git
+    git clone --branch  ${CF_BOSHWORKSPACE_BRANCH} https://${GIT_ACCOUNT_URL}/cf-boshworkspace.git
   fi
 fi
 pushd cf-boshworkspace

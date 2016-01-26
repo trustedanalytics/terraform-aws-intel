@@ -222,8 +222,8 @@ output "cf_sg_id" {
   value = "${module.cf-net.aws_security_group_cf_id}"
 }
 
-output "cf_boshworkspace_version" {
-  value = "${var.cf_boshworkspace_version}"
+output "cf_boshworkspace_branch" {
+  value = "${var.cf_boshworkspace_branch}"
 }
 
 output "cf_size" {
