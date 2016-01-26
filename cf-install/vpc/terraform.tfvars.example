@@ -1,0 +1,7 @@
+aws_access_key = "XXXXXXXXXXXXXXX"
+aws_secret_key = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+aws_key_path = "~/.ssh/bosh-us-east-1.pem"
+aws_key_name = "bosh"
+aws_region = "us-east-1"
+# tag values, key order: Project,IAP,Environment
+aws_tags = "Foo Bar,00000,Development"
