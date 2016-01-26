@@ -5,3 +5,4 @@
 crash.log
 .terraform/
 cdh-inventory
+platform-ansible
