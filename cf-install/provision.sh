@@ -44,10 +44,14 @@ CF_CLIENT_PASS=${30}
 OFFLINE_JAVA_BUILDPACK=${31}
 CF_BOSHWORKSPACE_REPOSITORY=${32}
 CF_BOSHWORKSPACE_BRANCH=${33}
-GIT_ACCOUNT_URL=${34}
-GH_AUTH=${35}
-QUAY_USERNAME=${36}
-QUAY_PASS=${37}
+DOCKER_SERVICES_BOSHWORKSPACE_REPOSITORY=${34}
+DOCKER_SERVICES_BOSHWORKSPACE_BRANCH=${35}
+LOGSEARCH_WORKSPACE_REPOSITORY=${36}
+LOGSEARCH_WORKSPACE_BRANCH=${37}
+GIT_ACCOUNT_URL=${38}
+GH_AUTH=${39}
+QUAY_USERNAME=${40}
+QUAY_PASS=${41}
 
 BACKBONE_Z1_COUNT=COUNT
 API_Z1_COUNT=COUNT
@@ -369,12 +373,9 @@ done
 if [[ $INSTALL_DOCKER == "true" ]]; then
 
   cd ~/workspace/deployments
-  if [[ ! -d "$HOME/workspace/deployments/docker-services-boshworkspace" ]]; then
-    if [ -n "$GH_AUTH" ]; then
-      git clone https://${GH_AUTH}@${GIT_ACCOUNT_URL}/docker-services-boshworkspace.git
-    else
-      git clone https://${GIT_ACCOUNT_URL}/docker-services-boshworkspace.git
-    fi
+
+  if [[ ! -d 'docker-services-boshworkspace' ]]; then
+    git clone -b ${DOCKER_SERVICES_BOSHWORKSPACE_BRANCH} ${DOCKER_SERVICES_BOSHWORKSPACE_REPOSITORY} docker-services-boshworkspace
   fi
 
   echo "Update the docker-aws-vpc.yml with cf-boshworkspace parameters"
@@ -431,8 +432,9 @@ if [[ $INSTALL_LOGSEARCH == "true" ]]; then
   sudo apt-get install python-jinja2 -y
 
   cd ~/workspace/deployments
-  if [[ ! -d "$HOME/workspace/deployments/logsearch-workspace" ]]; then
-    git clone https://github.com/trustedanalytics/logsearch-workspace.git
+
+  if [[ ! -d 'logsearch-workspace' ]]; then
+    git clone -b ${LOGSEARCH_WORKSPACE_BRANCH} ${LOGSEARCH_WORKSPACE_REPOSITORY} logsearch-workspace
   fi
 
   export X_ADMIN_PASS="$CF_ADMIN_PASS"

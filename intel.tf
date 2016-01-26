@@ -44,6 +44,10 @@ module "cf-install" {
   os_timeout = "${var.os_timeout}"
   cf_boshworkspace_repository = "${var.cf_boshworkspace_repository}"
   cf_boshworkspace_branch = "${var.cf_boshworkspace_branch}"
+  docker_services_boshworkspace_repository = "${var.docker_services_boshworkspace_repository}"
+  docker_services_boshworkspace_branch = "${var.docker_services_boshworkspace_branch}"
+  logsearch_workspace_repository = "${var.logsearch_workspace_repository}"
+  logsearch_workspace_branch = "${var.logsearch_workspace_branch}"
   git_account_url = "${var.git_account_url}"
   gh_auth = "${var.gh_auth}"
 }
@@ -406,6 +410,22 @@ output "cf_boshworkspace_repository" {
 
 output "cf_boshworkspace_branch" {
   value = "${module.cf-install.cf_boshworkspace_branch}"
+}
+
+output "docker_services_boshworkspace_repository" {
+  value = "${module.cf-install.docker_services_boshworkspace_repository}"
+}
+
+output "docker_services_boshworkspace_branch" {
+  value = "${module.cf-install.docker_services_boshworkspace_branch}"
+}
+
+output "logsearch_workspace_repository" {
+  value = "${module.cf-install.logsearch_workspace_repository}"
+}
+
+output "logsearch_workspace_branch" {
+  value = "${module.cf-install.logsearch_workspace_branch}"
 }
 
 output "git_account_url" {

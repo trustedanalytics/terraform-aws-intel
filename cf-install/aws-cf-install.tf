@@ -288,6 +288,22 @@ output "cf_boshworkspace_branch" {
   value = "${var.cf_boshworkspace_branch}"
 }
 
+output "docker_services_boshworkspace_repository" {
+  value = "${var.docker_services_boshworkspace_repository}"
+}
+
+output "docker_services_boshworkspace_branch" {
+  value = "${var.docker_services_boshworkspace_branch}"
+}
+
+output "logsearch_workspace_repository" {
+  value = "${var.logsearch_workspace_repository}"
+}
+
+output "logsearch_workspace_branch" {
+  value = "${var.logsearch_workspace_branch}"
+}
+
 output "git_account_url" {
   value = "${var.git_account_url}"
 }

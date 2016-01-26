@@ -135,6 +135,26 @@ variable "os_timeout" { default = "1200" }
 
 variable "cf_boshworkspace_repository" {}
 variable "cf_boshworkspace_branch" {}
+variable "docker_services_boshworkspace_repository" {}
+variable "docker_services_boshworkspace_branch" {}
+variable "logsearch_workspace_repository" {}
+variable "logsearch_workspace_branch" {}
+
+variable "git_account_url" {
+  default = "github.com/trustedanalytics"
+}
+
+variable "gh_auth" {
+  default = ""
+}
+
+variable "quay_username" {
+  default = ""
+}
+
+variable "quay_pass" {
+  default = ""
+}
 
 variable "git_account_url" {
   default = "github.com/trustedanalytics"
