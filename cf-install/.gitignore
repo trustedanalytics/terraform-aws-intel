@@ -1,0 +1,8 @@
+*.tfvars
+*.tfplan
+*.tfstate
+*.tfstate.backup
+crash.log
+.terraform/
+provision/provision.sh
+.DS_Store
