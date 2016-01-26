@@ -48,7 +48,8 @@ install_logsearch="false"
 # Control the version of CF to be deployed
 cf_release_version="212"
 
-# Control the version of the CF boshworkspace
+# cf-boshworkspace
+cf_boshworkspace_repository="https://github.com/trustedanalytics/cf-boshworkspace.git"
 cf_boshworkspace_branch="TAP-2016-JAN-2"
 
 # Optional parameters of db lb

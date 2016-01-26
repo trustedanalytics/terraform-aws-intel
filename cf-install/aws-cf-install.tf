@@ -222,10 +222,6 @@ output "cf_sg_id" {
   value = "${module.cf-net.aws_security_group_cf_id}"
 }
 
-output "cf_boshworkspace_branch" {
-  value = "${var.cf_boshworkspace_branch}"
-}
-
 output "cf_size" {
   value = "${var.cf_size}"
 }
@@ -282,6 +278,14 @@ output "offline_java_buildpack" {
 
 output "os_timeout" {
   value = "${var.os_timeout}"
+}
+
+output "cf_boshworkspace_repository" {
+  value = "${var.cf_boshworkspace_repository}"
+}
+
+output "cf_boshworkspace_branch" {
+  value = "${var.cf_boshworkspace_branch}"
 }
 
 output "git_account_url" {

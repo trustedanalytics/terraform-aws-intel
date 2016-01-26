@@ -28,25 +28,26 @@ LB_SUBNET1=${14}
 CF_SG=${15}
 CF_ADMIN_PASS=${16}
 CF_DOMAIN=${17}
-CF_BOSHWORKSPACE_BRANCH=${18}
-CF_SIZE=${19}
-DOCKER_SUBNET=${20}
-INSTALL_DOCKER=${21}
-CF_RELEASE_VERSION=${22}
-DEBUG=${23}
-PRIVATE_DOMAINS=${24}
-CF_SG_ALLOWS=${25}
-ENV_NAME=${26}
-CONSUL_MASTERS=${27}
-INSTALL_LOGSEARCH=${28}
-LS_SUBNET1=${29}
-LS_SUBNET_AZ=${30}
-CF_CLIENT_PASS=${31}
-OFFLINE_JAVA_BUILDPACK=${32}
-GIT_ACCOUNT_URL=${33}
-GH_AUTH=${34}
-QUAY_USERNAME=${35}
-QUAY_PASS=${36}
+CF_SIZE=${18}
+DOCKER_SUBNET=${19}
+INSTALL_DOCKER=${20}
+CF_RELEASE_VERSION=${21}
+DEBUG=${22}
+PRIVATE_DOMAINS=${23}
+CF_SG_ALLOWS=${24}
+ENV_NAME=${25}
+CONSUL_MASTERS=${26}
+INSTALL_LOGSEARCH=${27}
+LS_SUBNET1=${28}
+LS_SUBNET_AZ=${29}
+CF_CLIENT_PASS=${30}
+OFFLINE_JAVA_BUILDPACK=${31}
+CF_BOSHWORKSPACE_REPOSITORY=${32}
+CF_BOSHWORKSPACE_BRANCH=${33}
+GIT_ACCOUNT_URL=${34}
+GH_AUTH=${35}
+QUAY_USERNAME=${36}
+QUAY_PASS=${37}
 
 BACKBONE_Z1_COUNT=COUNT
 API_Z1_COUNT=COUNT
@@ -230,16 +231,10 @@ if [[ ! "$?" == 0 ]]; then
 fi
 popd
 
-# There is a specific branch of cf-boshworkspace that we use for terraform. This
-# may change in the future if we come up with a better way to handle maintaining
-# configs in a git repo
-if [[ ! -d "$HOME/workspace/deployments/cf-boshworkspace" ]]; then
-  if [ -n "$GH_AUTH" ]; then
-    git clone --branch  ${CF_BOSHWORKSPACE_BRANCH} https://${GH_AUTH}@${GIT_ACCOUNT_URL}/cf-boshworkspace.git
-  else
-    git clone --branch  ${CF_BOSHWORKSPACE_BRANCH} https://${GIT_ACCOUNT_URL}/cf-boshworkspace.git
-  fi
+if [[ ! -d 'cf-boshworkspace' ]]; then
+  git clone -b ${CF_BOSHWORKSPACE_BRANCH} ${CF_BOSHWORKSPACE_REPOSITORY} cf-boshworkspace
 fi
+
 pushd cf-boshworkspace
 mkdir -p ssh
 gem install bundler

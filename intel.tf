@@ -36,13 +36,14 @@ module "cf-install" {
   aws_tags = "${var.aws_tags}"
   deployment_size = "${var.deployment_size}"
   cf_release_version = "${var.cf_release_version}"
-  cf_boshworkspace_branch = "${var.cf_boshworkspace_branch}"
   cf_domain = "${var.cf_domain}"
   debug = "${var.debug}"
   private_cf_domains = "${var.private_cf_domains}"
   additional_cf_sg_allow_1 = "${module.cloudera.aws_cdh_cidr}"
   offline_java_buildpack = "${var.offline_java_buildpack}"
   os_timeout = "${var.os_timeout}"
+  cf_boshworkspace_repository = "${var.cf_boshworkspace_repository}"
+  cf_boshworkspace_branch = "${var.cf_boshworkspace_branch}"
   git_account_url = "${var.git_account_url}"
   gh_auth = "${var.gh_auth}"
 }
@@ -240,10 +241,6 @@ output "cf_sg" {
   value = "${module.cf-install.cf_sg}"
 }
 
-output "cf_boshworkspace_branch" {
-  value = "${module.cf-install.cf_boshworkspace_branch}"
-}
-
 output "cf_size" {
   value = "${module.cf-install.cf_size}"
 }
@@ -401,6 +398,14 @@ output "offline_java_buildpack" {
 
 output "os_timeout" {
   value = "${module.cf-install.os_timeout}"
+}
+
+output "cf_boshworkspace_repository" {
+  value = "${module.cf-install.cf_boshworkspace_repository}"
+}
+
+output "cf_boshworkspace_branch" {
+  value = "${module.cf-install.cf_boshworkspace_branch}"
 }
 
 output "git_account_url" {

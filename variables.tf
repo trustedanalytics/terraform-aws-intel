@@ -90,9 +90,6 @@ variable "aws_tags" {
   default = "Foo Bar,00000,Development"
 }
 
-variable "cf_boshworkspace_branch" {
-  default = "cf-207"
-}
 variable "cf_release_version" {
   default = "207"
 }
@@ -135,6 +132,9 @@ variable "mysql-cluster_size" {
 }
 
 variable "os_timeout" { default = "1200" }
+
+variable "cf_boshworkspace_repository" {}
+variable "cf_boshworkspace_branch" {}
 
 variable "git_account_url" {
   default = "github.com/trustedanalytics"

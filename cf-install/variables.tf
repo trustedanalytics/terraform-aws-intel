@@ -57,10 +57,6 @@ variable "cf_domain" {
   default = "XIP"
 }
 
-variable "cf_boshworkspace_branch" {
-  default = "v1.1.12"
-}
-
 variable "cf_release_version" {
   default = "210"
 }
@@ -197,6 +193,9 @@ variable "offline_java_buildpack" { default = "false" }
 variable "os_timeout" {
   default = "1200"
 }
+
+variable "cf_boshworkspace_repository" {}
+variable "cf_boshworkspace_branch" {}
 
 variable "git_account_url" {}
 variable "gh_auth" {}
