@@ -26,7 +26,7 @@ resource "aws_subnet" "cloudera" {
 }
 
 module "consul" {
-  source = "github.com/trustedanalytics/terraform-aws-consul"
+  source = "./consul"
   aws_centos_ami = "${var.aws_centos_ami}"
   aws_key_name = "${var.aws_key_name}"
   aws_access_key = "${var.aws_access_key}"
