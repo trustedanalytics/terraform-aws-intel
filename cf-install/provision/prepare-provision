@@ -71,10 +71,8 @@ assure_string_in_file $filename_provision 'DOCKER_SERVICES_BOSHWORKSPACE_REPOSIT
 assure_string_in_file $filename_provision 'DOCKER_SERVICES_BOSHWORKSPACE_BRANCH=${35}' "DOCKER_SERVICES_BOSHWORKSPACE_BRANCH=\"$(terraform output -state="${state_file}" docker_services_boshworkspace_branch)\""
 assure_string_in_file $filename_provision 'LOGSEARCH_WORKSPACE_REPOSITORY=${36}' "LOGSEARCH_WORKSPACE_REPOSITORY=\"$(terraform output -state="${state_file}" logsearch_workspace_repository)\""
 assure_string_in_file $filename_provision 'LOGSEARCH_WORKSPACE_BRANCH=${37}' "LOGSEARCH_WORKSPACE_BRANCH=\"$(terraform output -state="${state_file}" logsearch_workspace_branch)\""
-assure_string_in_file $filename_provision 'GIT_ACCOUNT_URL=${38}' "GIT_ACCOUNT_URL=\"$(terraform output -state="${state_file}" git_account_url)\""
-assure_string_in_file $filename_provision 'GH_AUTH=${39}' "GH_AUTH=\"$(terraform output -state="${state_file}" gh_auth)\""
-assure_string_in_file $filename_provision 'QUAY_USERNAME=${40}' "QUAY_USERNAME=\"$(terraform output -state="${state_file}" quay_username)\""
-assure_string_in_file $filename_provision 'QUAY_PASS=${41}' "QUAY_PASS=\"$(terraform output -state="${state_file}" quay_pass)\""
+assure_string_in_file $filename_provision 'QUAY_USERNAME=${38}' "QUAY_USERNAME=\"$(terraform output -state="${state_file}" quay_username)\""
+assure_string_in_file $filename_provision 'QUAY_PASS=${39}' "QUAY_PASS=\"$(terraform output -state="${state_file}" quay_pass)\""
 
 for job in BACKBONE API SERVICES HEALTH RUNNER; do
 	for zone in Z1 Z2; do

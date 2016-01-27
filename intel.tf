@@ -48,8 +48,6 @@ module "cf-install" {
   docker_services_boshworkspace_branch = "${var.docker_services_boshworkspace_branch}"
   logsearch_workspace_repository = "${var.logsearch_workspace_repository}"
   logsearch_workspace_branch = "${var.logsearch_workspace_branch}"
-  git_account_url = "${var.git_account_url}"
-  gh_auth = "${var.gh_auth}"
 }
 
 module "cloudera" {
@@ -426,14 +424,6 @@ output "logsearch_workspace_repository" {
 
 output "logsearch_workspace_branch" {
   value = "${module.cf-install.logsearch_workspace_branch}"
-}
-
-output "git_account_url" {
-  value = "${module.cf-install.git_account_url}"
-}
-
-output "gh_auth" {
-  value  = "${module.cf-install.gh_auth}"
 }
 
 output "quay_username" {

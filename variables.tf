@@ -140,30 +140,6 @@ variable "docker_services_boshworkspace_branch" {}
 variable "logsearch_workspace_repository" {}
 variable "logsearch_workspace_branch" {}
 
-variable "git_account_url" {
-  default = "github.com/trustedanalytics"
-}
-
-variable "gh_auth" {
-  default = ""
-}
-
-variable "quay_username" {
-  default = ""
-}
-
-variable "quay_pass" {
-  default = ""
-}
-
-variable "git_account_url" {
-  default = "github.com/trustedanalytics"
-}
-
-variable "gh_auth" {
-  default = ""
-}
-
 variable "quay_username" {
   default = ""
 }

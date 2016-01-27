@@ -201,9 +201,6 @@ variable "docker_services_boshworkspace_branch" {}
 variable "logsearch_workspace_repository" {}
 variable "logsearch_workspace_branch" {}
 
-variable "git_account_url" {}
-variable "gh_auth" {}
-
 variable additional_cf_sg_allow_1 { default = "" }
 variable additional_cf_sg_allow_2 { default = "" }
 variable additional_cf_sg_allow_3 { default = "" }

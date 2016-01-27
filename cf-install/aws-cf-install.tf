@@ -303,12 +303,3 @@ output "logsearch_workspace_repository" {
 output "logsearch_workspace_branch" {
   value = "${var.logsearch_workspace_branch}"
 }
-
-output "git_account_url" {
-  value = "${var.git_account_url}"
-}
-
-output "gh_auth" {
-  value = "${var.gh_auth}"
-}
-
