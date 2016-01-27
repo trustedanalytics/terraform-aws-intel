@@ -90,9 +90,6 @@ variable "aws_tags" {
   default = "Foo Bar,00000,Development"
 }
 
-variable "cf_boshworkspace_version" {
-  default = "cf-207"
-}
 variable "cf_release_version" {
   default = "207"
 }
@@ -136,13 +133,12 @@ variable "mysql-cluster_size" {
 
 variable "os_timeout" { default = "1200" }
 
-variable "git_account_url" {
-  default = "github.com/trustedanalytics"
-}
-
-variable "gh_auth" {
-  default = ""
-}
+variable "cf_boshworkspace_repository" {}
+variable "cf_boshworkspace_branch" {}
+variable "docker_services_boshworkspace_repository" {}
+variable "docker_services_boshworkspace_branch" {}
+variable "logsearch_workspace_repository" {}
+variable "logsearch_workspace_branch" {}
 
 variable "quay_username" {
   default = ""

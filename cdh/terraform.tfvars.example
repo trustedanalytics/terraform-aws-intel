@@ -1,0 +1,9 @@
+aws_access_key = "xxxxxxx"
+aws_secret_key = "xxxxxxx"
+aws_key_path = "~/.ssh/mykey.pem"
+aws_key_name = "aws-cdh"
+subnet_id="subnet-example"
+security_group="sg-example"
+aws_region = "eu-west-1"
+#no trailing slash here!!! the directory must exist
+ansible_repo_path = "/home/xxx/GIT_REPOS/ansible-cdh"

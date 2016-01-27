@@ -36,15 +36,18 @@ module "cf-install" {
   aws_tags = "${var.aws_tags}"
   deployment_size = "${var.deployment_size}"
   cf_release_version = "${var.cf_release_version}"
-  cf_boshworkspace_version = "${var.cf_boshworkspace_version}"
   cf_domain = "${var.cf_domain}"
   debug = "${var.debug}"
   private_cf_domains = "${var.private_cf_domains}"
   additional_cf_sg_allow_1 = "${module.cloudera.aws_cdh_cidr}"
   offline_java_buildpack = "${var.offline_java_buildpack}"
   os_timeout = "${var.os_timeout}"
-  git_account_url = "${var.git_account_url}"
-  gh_auth = "${var.gh_auth}"
+  cf_boshworkspace_repository = "${var.cf_boshworkspace_repository}"
+  cf_boshworkspace_branch = "${var.cf_boshworkspace_branch}"
+  docker_services_boshworkspace_repository = "${var.docker_services_boshworkspace_repository}"
+  docker_services_boshworkspace_branch = "${var.docker_services_boshworkspace_branch}"
+  logsearch_workspace_repository = "${var.logsearch_workspace_repository}"
+  logsearch_workspace_branch = "${var.logsearch_workspace_branch}"
 }
 
 module "cloudera" {
@@ -240,10 +243,6 @@ output "cf_sg" {
   value = "${module.cf-install.cf_sg}"
 }
 
-output "cf_boshworkspace_version" {
-  value = "${module.cf-install.cf_boshworkspace_version}"
-}
-
 output "cf_size" {
   value = "${module.cf-install.cf_size}"
 }
@@ -403,12 +402,28 @@ output "os_timeout" {
   value = "${module.cf-install.os_timeout}"
 }
 
-output "git_account_url" {
-  value = "${module.cf-install.git_account_url}"
+output "cf_boshworkspace_repository" {
+  value = "${module.cf-install.cf_boshworkspace_repository}"
 }
 
-output "gh_auth" {
-  value  = "${module.cf-install.gh_auth}"
+output "cf_boshworkspace_branch" {
+  value = "${module.cf-install.cf_boshworkspace_branch}"
+}
+
+output "docker_services_boshworkspace_repository" {
+  value = "${module.cf-install.docker_services_boshworkspace_repository}"
+}
+
+output "docker_services_boshworkspace_branch" {
+  value = "${module.cf-install.docker_services_boshworkspace_branch}"
+}
+
+output "logsearch_workspace_repository" {
+  value = "${module.cf-install.logsearch_workspace_repository}"
+}
+
+output "logsearch_workspace_branch" {
+  value = "${module.cf-install.logsearch_workspace_branch}"
 }
 
 output "quay_username" {

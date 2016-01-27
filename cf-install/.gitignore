@@ -4,6 +4,5 @@
 *.tfstate.backup
 crash.log
 .terraform/
-cdh-inventory
-platform-ansible
-env.yml
+provision/provision.sh
+.DS_Store

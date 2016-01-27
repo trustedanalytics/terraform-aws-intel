@@ -1,17 +1,33 @@
+# Copyright (c) 2015 Intel Corporation
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+
 SHELL = /bin/bash
 .PHONY: all update plan apply destroy provision
+
+include *.mk
 
 all: update plan apply provision
 
 update:
-	$(eval has_upstream := $(shell git rev-parse @{u} >/dev/null 2>&1; echo $$?))
-	if [ $(has_upstream) -eq 0 ]; then git pull; fi
-	# Update submodule pointers; Clean out any submodule changes
-	git submodule sync
-	git submodule foreach --recursive 'git submodule sync; git clean -d --force --force'
-	# Update submodule content, checkout if necessary
-	git submodule update --init --recursive
-	git clean -ffd
+	git pull
+
+ifneq ($(wildcard platform-ansible),)
+	cd platform-ansible && git pull origin ${PLATFORM_ANSIBLE_BRANCH}
+else
+	git clone -b ${PLATFORM_ANSIBLE_BRANCH} ${PLATFORM_ANSIBLE_REPOSITORY} platform-ansible
+endif
 
 plan:
 	terraform get -update
@@ -28,6 +44,7 @@ clean:
 	rm -f terraform.tfplan
 	rm -f terraform.tfstate
 	rm -fR .terraform/
+	rm -fr platform-ansible
 
 provision:
 	pushd cf-install; export STATE_FILE="../terraform.tfstate"; make provision; popd
