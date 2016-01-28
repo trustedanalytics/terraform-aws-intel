@@ -64,6 +64,8 @@ RUNNER_Z2_COUNT=COUNT
 
 boshDirectorHost="${IPMASK}.1.4"
 
+STEMCELL_VERSION='3104'
+
 cd $HOME
 (("$?" == "0")) ||
   fail "Could not find HOME folder, terminating install."
@@ -179,12 +181,18 @@ fi
 mkdir -p {bin,workspace/deployments/microbosh,workspace/tools}
 
 pushd workspace/deployments
+
+# TODO: Use this stemcell in BOSH workspaces
+STEMCELL=~/light-bosh-stemcell-${STEMCELL_VERSION}-aws-xen-hvm-ubuntu-trusty-go_agent.tgz
+test -e ${STEMCELL} || wget -O ${STEMCELL} https://bosh.io/d/stemcells/bosh-aws-xen-hvm-ubuntu-trusty-go_agent?v=${STEMCELL_VERSION}
+
 pushd microbosh
 create_settings_yml() {
 cat <<EOF > settings.yml
 ---
 bosh:
   name: bosh-${VPC}
+  stemcell_path: ${STEMCELL}
 provider:
   name: aws
   credentials:
