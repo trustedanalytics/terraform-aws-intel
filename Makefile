@@ -49,3 +49,9 @@ clean:
 provision:
 	pushd cf-install; export STATE_FILE="../terraform.tfstate"; make provision; popd
 	scripts/get_ips.sh
+
+# usage: make backup S3BUCKET="bucketname"
+backup:
+	$(eval bkp_file:=$(shell awk '/aws_key_name/{gsub("\"","");print $$3}' <terraform.tfvars)_$(shell date +%s).tar.gz)
+	tar -czf $(bkp_file) *.tfvars *.tfplan *.tfstate *.tfstate.backup
+	aws s3 cp $(bkp_file) s3://$(S3BUCKET)/$(bkp_file) && rm -f $(bkp_file)
