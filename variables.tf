@@ -133,12 +133,29 @@ variable "mysql-cluster_size" {
 
 variable "os_timeout" { default = "1200" }
 
-variable "cf_boshworkspace_repository" {}
-variable "cf_boshworkspace_branch" {}
-variable "docker_services_boshworkspace_repository" {}
-variable "docker_services_boshworkspace_branch" {}
-variable "logsearch_workspace_repository" {}
-variable "logsearch_workspace_branch" {}
+variable "cf_boshworkspace_repository" {
+  default = "https://github.com/trustedanalytics/cf-boshworkspace.git"
+}
+
+variable "cf_boshworkspace_branch" {
+  default = "master"
+}
+
+variable "docker_services_boshworkspace_repository" {
+  default = "https://github.com/trustedanalytics/docker-services-boshworkspace.git"
+}
+
+variable "docker_services_boshworkspace_branch" {
+  default = "master"
+}
+
+variable "logsearch_workspace_repository" {
+  default = "https://github.com/trustedanalytics/logsearch-workspace.git"
+}
+
+variable "logsearch_workspace_branch" {
+  default = "master"
+}
 
 variable "quay_username" {
   default = ""
