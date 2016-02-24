@@ -20,7 +20,9 @@ quay_pass = ""
 
 # tag values, key order: Project,IAP,Environment
 aws_tags = "Foo Bar,00000,Development"
-cf_domain="XIP" # Use "XIP" for an xip.io based domain, or provide your own domain here
+# Use "XIP" for an xip.io based domain, or provide your own domain here
+# NOTE: xip.io should never be used for production deployment
+cf_domain="XIP" 
 
 # Prevent Host Header spoofing from hitting internal APIs:
 private_cf_domains="xip.internal"
