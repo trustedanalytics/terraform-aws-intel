@@ -1,7 +1,10 @@
 # Change needed
 
+# AWS IAM credentials
 aws_access_key = "YOUR-AWS-KEY"
 aws_secret_key = "YOUR-AWS-SECRET"
+
+# CloudFoundry and UAAC passwords
 cf_admin_pass = "PUT-YOUR-PASSWORD-HERE"
 cf_client_pass = "PUT-YOUR-CF-PASSWORD-HERE"
 

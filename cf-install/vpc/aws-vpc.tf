@@ -11,7 +11,7 @@ resource "aws_vpc" "default" {
 		Project = "${element(split(\",\",var.aws_tags),0)}"
 		IAP = "${element(split(\",\",var.aws_tags),1)}"
 		Environment = "${element(split(\",\",var.aws_tags),2)}"
-		Name = "${var.aws_vpc_name}"
+		Name = "${var.env_name}"
 	}
 }
 
