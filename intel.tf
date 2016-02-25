@@ -33,6 +33,7 @@ module "cf-install" {
   cf_client_pass = "${var.cf_client_pass}"
   install_docker_services = "${var.install_docker_services}"
   cf_size = "${var.cf_size}"
+  env_name = "${var.env_name}"
   aws_tags = "${var.aws_tags}"
   deployment_size = "${var.deployment_size}"
   cf_release_version = "${var.cf_release_version}"

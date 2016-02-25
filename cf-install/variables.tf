@@ -64,6 +64,9 @@ variable "cf_release_version" {
 variable "cf_size" {
   default = "tiny"
 }
+variable "env_name" {
+  default = "trustedanalytics"
+}
 
 variable "aws_centos_ami" {
     default = {
