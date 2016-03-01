@@ -346,7 +346,7 @@ if [[ -n "$CF_SG_ALLOWS" ]]; then
 fi
 
 RELEASE=~/cf-release-${CF_RELEASE_VERSION}.tgz
-test -e ${RELEASE} || wget -O ${RELEASE} https://bosh.io/d/github.com/cloudfoundry/cf-release?v=${CF_RELEASE_VERSION}
+test -e ${RELEASE} || wget -nv -O ${RELEASE} https://bosh.io/d/github.com/cloudfoundry/cf-release?v=${CF_RELEASE_VERSION}
 bosh upload release ${RELEASE}
 
 bosh deployment cf-aws-${CF_SIZE}
