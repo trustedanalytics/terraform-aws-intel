@@ -15,6 +15,7 @@ module "vpc" {
   aws_region = "${var.aws_region}"
   aws_key_path = "${var.aws_key_path}"
   aws_tags = "${var.aws_tags}"
+  env_name = "${var.env_name}"
 }
 
 output "tags.Project" {
