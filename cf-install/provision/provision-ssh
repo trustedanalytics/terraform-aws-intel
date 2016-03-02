@@ -27,4 +27,4 @@ do
   ((index+=1))
 done
 
-ssh -i ${keyPath} ubuntu@$bastionIP "chmod +x $targetPath ; $targetPath"
+ssh -o StrictHostKeyChecking=no -i ${keyPath} ubuntu@$bastionIP "chmod +x $targetPath ; $targetPath"
