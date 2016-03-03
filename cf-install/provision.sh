@@ -88,7 +88,7 @@ case "${release}" in
   (*Ubuntu*|*Debian*)
     sudo apt-get update -yq
     sudo apt-get install -yq aptitude
-    sudo aptitude -yq install build-essential vim-nox git unzip tree \
+    sudo apt-get install -yq build-essential vim-nox git unzip tree \
       libxslt-dev libxslt1.1 libxslt1-dev libxml2 libxml2-dev \
       libpq-dev libmysqlclient-dev libsqlite3-dev \
       g++ gcc make libc6-dev libreadline6-dev zlib1g-dev libssl-dev libyaml-dev \
