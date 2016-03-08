@@ -25,20 +25,6 @@ resource "aws_subnet" "cloudera" {
   }
 }
 
-module "consul" {
-  source = "./consul"
-  aws_centos_ami = "${var.aws_centos_ami}"
-  aws_key_name = "${var.aws_key_name}"
-  aws_access_key = "${var.aws_access_key}"
-  aws_secret_key = "${var.aws_secret_key}"
-  aws_region = "${var.aws_region}"
-  tags_IAP = "${var.tags_IAP}"
-  tags_Project = "${var.tags_Project}"
-  tags_Environment = "${var.tags_Environment}"
-  subnet_id = "${aws_subnet.cloudera.id}"
-  security_group = "${var.security_group}"
-}
-
 resource "aws_route_table_association" "cloudera-private" {
   subnet_id = "${aws_subnet.cloudera.id}"
   route_table_id = "${var.aws_route_table_private_id}"
@@ -196,5 +182,5 @@ output "aws_cdh_cidr" {
 }
 
 output "consul_masters" {
-  value = "${module.consul.consul_masters}"
+  value = "${join(",", aws_instance.cdh-master.*.private_ip)}"
 }
