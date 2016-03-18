@@ -390,6 +390,7 @@ if [[ $INSTALL_DOCKER == "true" ]]; then
   /bin/sed -i \
     -e "s/SUBNET_ID/${DOCKER_SUBNET}/g" \
     -e "s/ENV_NAME/${ENV_NAME}/g" \
+    -e "s/\(dns_servers:\).*/\1 [${CONSUL_MASTERS}]/" \
     -e "s/DOCKER_SG/${CF_SG}/g" \
     "${dockerDeploymentManifest}"
 
