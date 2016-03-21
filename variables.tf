@@ -70,7 +70,7 @@ variable "ansible_repo_path" {
 }
 
 variable "install_docker_services" {
-  default = "false"
+  default = "true"
 }
 
 variable "install_logsearch" {
