@@ -36,6 +36,8 @@ private_cf_domains="xip.internal"
 # those sizes inform instance counts
 
 deployment_size="small"
+runner_z1_count="2"
+runner_z2_count="0"
 install_docker_services="true"
 install_logsearch="false"
 

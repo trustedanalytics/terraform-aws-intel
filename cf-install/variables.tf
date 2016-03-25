@@ -108,9 +108,9 @@ variable "deployment_size" {
 variable backbone_z1_count {
     default = {
         small  = "1"
-        med    = "2"
+        med    = "1"
         med-ha = "1"
-        big-ha = "2"
+        big-ha = "1"
     }
 }
 variable api_z1_count {
@@ -151,7 +151,7 @@ variable backbone_z2_count {
         small  = "0"
         med    = "0"
         med-ha = "1"
-        big-ha = "2"
+        big-ha = "1"
     }
 }
 variable api_z2_count {

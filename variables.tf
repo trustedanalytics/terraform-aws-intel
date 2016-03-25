@@ -164,3 +164,11 @@ variable "quay_username" {
 variable "quay_pass" {
   default = ""
 }
+
+variable "runner_z1_count" {
+  default = "2"
+}
+
+variable "runner_z2_count" {
+  default = "0"
+}
