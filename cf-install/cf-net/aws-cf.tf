@@ -136,6 +136,24 @@ output "aws_subnet_logsearch_availability_zone" {
 	value = "${aws_subnet.logsearch.availability_zone}"
 }
 
+resource "aws_subnet" "kubernetes" {
+  vpc_id = "${var.aws_vpc_id}"
+  cidr_block = "${var.network}.${var.offset}6.0/24"
+  availability_zone = "${var.aws_subnet_cfruntime-2a_availability_zone}"
+  tags {
+    Name = "kubernetes"
+  }
+  tags {
+    Project = "${var.tags_Project}"
+    IAP = "${var.tags_IAP}"
+    Environment = "${var.tags_Environment}"
+  }
+}
+
+output "aws_subnet_kubernetes_id" {
+	value = "${aws_subnet.kubernetes.id}"
+}
+
 # Routing table for private subnets
 
 resource "aws_route_table_association" "cfruntime-2a-private" {
@@ -150,6 +168,11 @@ resource "aws_route_table_association" "cfruntime-2b-private" {
 
 resource "aws_route_table_association" "docker" {
   subnet_id = "${aws_subnet.docker.id}"
+  route_table_id = "${var.aws_route_table_private_id}"
+}
+
+resource "aws_route_table_association" "kubernetes" {
+  subnet_id = "${aws_subnet.kubernetes.id}"
   route_table_id = "${var.aws_route_table_private_id}"
 }
 
