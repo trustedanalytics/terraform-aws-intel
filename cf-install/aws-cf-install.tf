@@ -86,7 +86,7 @@ resource "aws_instance" "nginx-master" {
   instance_type = "m3.medium"
   key_name = "${var.aws_key_name}"
   associate_public_ip_address = true
-  security_groups = ["${module.cf-net.aws_security_group_cf_id}"]
+  security_groups = ["${module.cf-net.aws_security_group_nginx_id}"]
   subnet_id = "${module.cf-net.aws_subnet_lb_id}"
 
   tags {
@@ -227,6 +227,14 @@ output "cf_sg_id" {
   value = "${module.cf-net.aws_security_group_cf_id}"
 }
 
+output "nginx_sg" {
+  value = "${module.cf-net.aws_security_group_nginx_name}"
+}
+
+output "nginx_sg_id" {
+  value = "${module.cf-net.aws_security_group_nginx_id}"
+}
+
 output "cf_size" {
   value = "${var.cf_size}"
 }
@@ -275,6 +283,9 @@ output "ls_subnet1_az" {
 
 output "aws_security_group_cf_id" {
   value = "${module.cf-net.aws_security_group_cf_id}"
+}
+output "aws_security_group_nginx_id" {
+  value = "${module.cf-net.aws_security_group_nginx_id}"
 }
 
 output "offline_java_buildpack" {
