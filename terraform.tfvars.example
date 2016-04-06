@@ -44,15 +44,15 @@ cf_release_version="212"
 
 # cf-boshworkspace
 cf_boshworkspace_repository="https://github.com/trustedanalytics/cf-boshworkspace.git"
-cf_boshworkspace_branch="TAP-2016-JAN-2-1"
+cf_boshworkspace_branch="release/TAP-2016-JAN-2-2"
 
 # docker-services-boshworkspace
 docker_services_boshworkspace_repository="https://github.com/trustedanalytics/docker-services-boshworkspace.git"
-docker_services_boshworkspace_branch="TAP-2016-JAN-2-1"
+docker_services_boshworkspace_branch="release/TAP-2016-JAN-2-2"
 
 # logsearch-boshworkspace
 logsearch_workspace_repository="https://github.com/trustedanalytics/logsearch-workspace.git"
-logsearch_workspace_branch="TAP-2016-JAN-2-1"
+logsearch_workspace_branch="release/TAP-2016-JAN-2-2"
 
 # Optional parameters of db lb
 #db-lb_instance_count="0"
