@@ -39,7 +39,12 @@ deployment_size="small"
 runner_z1_count="2"
 runner_z2_count="0"
 install_docker_services="true"
-install_logsearch="false"
+install_logsearch="true"
+
+# Control the logsearch deployment size
+# Values are 'small' and 'medium'
+
+logsearch_deployment_size="small"
 
 # Should we use offline buildpack for java?
 #offline_java_buildpack="true"

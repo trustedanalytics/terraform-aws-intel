@@ -434,3 +434,7 @@ output "quay_username" {
 output "quay_pass" {
   value = "${var.quay_pass}"
 }
+
+output "logsearch_deployment_size" {
+  value = "${var.logsearch_deployment_size}"
+}

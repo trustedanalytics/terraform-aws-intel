@@ -74,7 +74,11 @@ variable "install_docker_services" {
 }
 
 variable "install_logsearch" {
-  default = "false"
+  default = "true"
+}
+
+variable "logsearch_deployment_size" {
+  default = "small"
 }
 
 variable "cf_size" {
