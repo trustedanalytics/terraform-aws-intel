@@ -272,6 +272,10 @@ output "aws_subnet_docker_id" {
   value = "${module.cf-install.aws_subnet_docker_id}"
 }
 
+output "aws_subnet_kubernetes_id" {
+  value = "${module.cf-install.aws_subnet_kubernetes_id}"
+}
+
 output "aws_vpc_id" {
   value = "${module.cf-install.aws_vpc_id}"
 }
