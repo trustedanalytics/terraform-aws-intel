@@ -7,7 +7,9 @@ state_file="${STATE_FILE:-./terraform.tfstate}"
 #You need the sed nonsense if the path to your key has a ~ in it
 keyPath=$(terraform output -state="${state_file}" aws_key_path | sed -e "s#^~#$HOME#")
 scriptPath="provision/provision.sh"
+gpgKeyPath="provision/rvm.gpg"
 targetPath="/home/ubuntu/provision.sh"
+gpgKeyTargetPath="/home/ubuntu/rvm.gpg"
 bastionIP=$(terraform output -state="${state_file}" bastion_ip)
 maxConnectionAttempts=10
 sleepSeconds=10
@@ -19,6 +21,7 @@ index=1
 while (( $index <= $maxConnectionAttempts ))
 do
   scp -o StrictHostKeyChecking=no -i ${keyPath} $scriptPath ubuntu@$bastionIP:$targetPath
+  scp -o StrictHostKeyChecking=no -i ${keyPath} $gpgKeyPath ubuntu@$bastionIP:$gpgKeyTargetPath
   case $? in
     (0) echo "${index}> Success"; break ;;
     (*) echo "${index} of ${maxConnectionAttempts}> Bastion SSH server not ready yet, waiting ${sleepSeconds} seconds..." ;;
