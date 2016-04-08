@@ -91,7 +91,7 @@ variable "aws_tags" {
 }
 
 variable "cf_release_version" {
-  default = "207"
+  default = "212"
 }
 variable "deployment_size" {
  default = "small"
