@@ -113,6 +113,10 @@ output "aws_subnet_docker_id" {
   value = "${module.cf-net.aws_subnet_docker_id}"
 }
 
+output "aws_subnet_kubernetes_id" {
+  value = "${module.cf-net.aws_subnet_kubernetes_id}"
+}
+
 resource "aws_instance" "bastion" {
   ami = "${lookup(var.aws_ubuntu_ami, var.aws_region)}"
   instance_type = "m3.medium"
