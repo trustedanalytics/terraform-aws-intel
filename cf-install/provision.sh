@@ -411,7 +411,12 @@ if [[ $INSTALL_DOCKER == "true" ]]; then
   echo "export DOCKER_HOST=tcp://${DOCKER_IP}:4243" | sudo tee -a /etc/profile.d/docker.sh
   sudo chmod +x /etc/profile.d/docker.sh
   source /etc/profile.d/docker.sh
-
+  
+  # add private images from QUAY
+  if [[ -n "$QUAY_USERNAME" ]]; then
+    patch -p1 <templates/quay.patch
+  fi
+  
   #list all images, convert to JSON, get the container image and tag with JQ
   DOCKER_IMAGES=$(cat templates/docker-properties.yml | ruby -ryaml -rjson -e "print JSON.dump(YAML.load(ARGF))" |\
     jq -r ".properties.broker.services[].plans[].container | [.image, .tag] | @sh" | sed "s/' '/:/;s/'//g")
