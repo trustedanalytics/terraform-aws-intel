@@ -51,6 +51,7 @@ LOGSEARCH_WORKSPACE_BRANCH=${37}
 QUAY_USERNAME=${38}
 QUAY_PASS=${39}
 LOGSEARCH_DEPLOYMENT_SIZE=${40}
+PRIVATE_ROUTE_TABLE_ID=${41}
 
 BACKBONE_Z1_COUNT=COUNT
 API_Z1_COUNT=COUNT
@@ -439,6 +440,17 @@ if [[ $INSTALL_DOCKER == "true" ]]; then
   #now the deployment that will make persistent 
   #containers working
   bosh -n deploy
+
+  #install aws cli and configure it
+  sudo apt-get install awscli -y
+  export AWS_ACCESS_KEY_ID=$AWS_KEY_ID
+  export AWS_SECRET_ACCESS_KEY=$AWS_ACCESS_KEY
+  export AWS_DEFAULT_REGION=$REGION
+
+  #get docker instance id and add route
+  DOCKER_INSTANCE_ID=$(bosh instances --detail | sed -nr 's/.*docker.* (i-[a-zA-Z0-9]+) .*$/\1/p')
+  aws ec2 create-route --route-table-id $PRIVATE_ROUTE_TABLE_ID --destination-cidr-block 172.17.0.0/16 --instance-id $DOCKER_INSTANCE_ID
+  aws ec2 modify-instance-attribute --instance-id $DOCKER_INSTANCE_ID --source-dest-check "{\"Value\": false}"
 fi
 
 if [[ $INSTALL_LOGSEARCH == "true" ]]; then
