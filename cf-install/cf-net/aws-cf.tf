@@ -281,6 +281,85 @@ output "aws_security_group_cf_name" {
 output "aws_security_group_cf_id" {
   value = "${aws_security_group.cf.id}"
 }
+resource "aws_security_group" "nginx" {
+  name = "nginx-${var.offset}-${var.aws_vpc_id}"
+  description = "Nginx security groups"
+  vpc_id = "${var.aws_vpc_id}"
+
+
+  ingress {
+    from_port = 80
+    to_port = 80
+    protocol = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  ingress {
+    from_port = 443
+    to_port = 443
+    protocol = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  ingress {
+    cidr_blocks = ["0.0.0.0/0"]
+    from_port = 32768
+    to_port = 60000
+    protocol = "tcp"
+  }
+  ingress {
+    cidr_blocks = ["0.0.0.0/0"]
+    from_port = 32768
+    to_port = 60000
+    protocol = "udp"
+  }
+
+  ingress {
+    cidr_blocks = ["0.0.0.0/0"]
+    from_port = -1
+    to_port = -1
+    protocol = "icmp"
+  }
+
+  ingress {
+    from_port = 0
+    to_port = 65535
+    protocol = "tcp"
+    cidr_blocks = ["${var.network}.0.0/16"]
+  }
+
+  ingress {
+    from_port = 0
+    to_port = 65535
+    protocol = "udp"
+    cidr_blocks = ["${var.network}.0.0/16"]
+  }
+
+  egress {
+    from_port = 0
+    to_port = 0
+    protocol = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  tags {
+    Name = "nginx-${var.offset}-${var.aws_vpc_id}"
+  }
+  tags {
+    Project = "${var.tags_Project}"
+    IAP = "${var.tags_IAP}"
+    Environment = "${var.tags_Environment}"
+  }
+
+}
+
+output "aws_security_group_nginx_name" {
+  value = "${aws_security_group.nginx.name}"
+}
+
+output "aws_security_group_nginx_id" {
+  value = "${aws_security_group.nginx.id}"
+}
 
 resource "aws_eip" "cf" {
   vpc = true
