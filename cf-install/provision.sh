@@ -50,6 +50,7 @@ LOGSEARCH_WORKSPACE_REPOSITORY=${36}
 LOGSEARCH_WORKSPACE_BRANCH=${37}
 QUAY_USERNAME=${38}
 QUAY_PASS=${39}
+LOGSEARCH_DEPLOYMENT_SIZE=${40}
 
 BACKBONE_Z1_COUNT=COUNT
 API_Z1_COUNT=COUNT
@@ -464,7 +465,11 @@ if [[ $INSTALL_LOGSEARCH == "true" ]]; then
 
   bosh upload release https://bosh.io/d/github.com/logsearch/logsearch-boshrelease?v=23.0.0
 
-  python generate_template.py manifest-aws.yml.j2
+  if [[ $LOGSEARCH_DEPLOYMENT_SIZE == "medium" ]]; then
+    python generate_template.py manifest-aws.yml.j2
+  else
+    python generate_template.py manifest-aws-small.yml.j2
+  fi
 
   bosh -d manifest.yml -n deploy
   bosh -d manifest.yml -n run errand push-kibana
