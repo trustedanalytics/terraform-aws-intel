@@ -469,7 +469,14 @@ if [[ $INSTALL_LOGSEARCH == "true" ]]; then
   export X_CF_DOMAIN="$CF_DOMAIN"
   export X_CLIENT_PASS="$CF_CLIENT_PASS"
   export X_DIRECTOR_UUID="$DIRECTOR_UUID"
-
+  X_LOGS_ORG="system"
+  X_LOGS_SPACE="elk-for-pcf"
+  X_LOGS_USER="admin"
+  X_LOGS_APP="logs"
+  X_LOGS_DOMAIN="https://api."$CF_DOMAIN
+  X_LOGS_INSTANCE="4"
+  X_LOGS_MEMORY="1G"
+  export PATH=$PATH:$HOME/bin/traveling-cf-admin
   cd "$HOME/workspace/deployments/logsearch-workspace"
   mkdir -p releases
   if [[ ! -d "releases/logsearch-for-cloudfoundry" ]]; then
@@ -490,6 +497,10 @@ if [[ $INSTALL_LOGSEARCH == "true" ]]; then
 
   bosh -d manifest.yml -n deploy
   bosh -d manifest.yml -n run errand push-kibana
+
+  cf login -a $X_LOGS_DOMAIN -u $X_LOGS_USER -p $CF_ADMIN_PASS -o $X_LOGS_ORG -s $X_LOGS_SPACE --skip-ssl-validation
+  cf scale $X_LOGS_APP -i $X_LOGS_INSTANCE -m $X_LOGS_MEMORY -f
+
 fi
 
 echo "Provision script completed..."
