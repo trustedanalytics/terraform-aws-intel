@@ -19,4 +19,4 @@ sudo rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch
 sudo sed -i -e 's@^mirrorlist@#mirrorlist@' /etc/yum.repos.d/epel*.repo
 sudo sed -i -e 's@^#baseurl.*/epel@baseurl=http://dl.fedoraproject.org/pub/epel@' /etc/yum.repos.d/epel*.repo
 sudo yum clean all
-sudo yum install git ansible-1.9*.el6 screen tmux -y
+sudo yum install git ansible1.9*.el6 screen tmux -y
