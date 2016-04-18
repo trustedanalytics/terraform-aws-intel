@@ -415,8 +415,9 @@ if [[ $INSTALL_DOCKER == "true" ]]; then
   source /etc/profile.d/docker.sh
   
   # add private images from QUAY
-  if [[ -n "$QUAY_USERNAME" ]]; then
+  if [[ -n "$QUAY_USERNAME" ]] &&  [[ ! -f quay.patched ]]; then
     patch -p1 <templates/quay.patch
+    touch quay.patched
   fi
   
   #list all images, convert to JSON, get the container image and tag with JQ
