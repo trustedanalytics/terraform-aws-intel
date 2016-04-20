@@ -244,7 +244,10 @@ fi
 popd
 
 if [[ ! -d 'cf-boshworkspace' ]]; then
-  git clone -b ${CF_BOSHWORKSPACE_BRANCH} ${CF_BOSHWORKSPACE_REPOSITORY} cf-boshworkspace
+  git clone ${CF_BOSHWORKSPACE_REPOSITORY} cf-boshworkspace
+  pushd cf-boshworkspace
+  git checkout ${CF_BOSHWORKSPACE_BRANCH}
+  popd
 fi
 
 pushd cf-boshworkspace
@@ -383,7 +386,10 @@ if [[ $INSTALL_DOCKER == "true" ]]; then
   cd ~/workspace/deployments
 
   if [[ ! -d 'docker-services-boshworkspace' ]]; then
-    git clone -b ${DOCKER_SERVICES_BOSHWORKSPACE_BRANCH} ${DOCKER_SERVICES_BOSHWORKSPACE_REPOSITORY} docker-services-boshworkspace
+    git clone ${DOCKER_SERVICES_BOSHWORKSPACE_REPOSITORY} docker-services-boshworkspace
+    pushd docker-services-boshworkspace
+    git checkout ${DOCKER_SERVICES_BOSHWORKSPACE_BRANCH}
+    popd
   fi
 
   echo "Update the docker-aws-vpc.yml with cf-boshworkspace parameters"
@@ -460,7 +466,10 @@ if [[ $INSTALL_LOGSEARCH == "true" ]]; then
   cd ~/workspace/deployments
 
   if [[ ! -d 'logsearch-workspace' ]]; then
-    git clone -b ${LOGSEARCH_WORKSPACE_BRANCH} ${LOGSEARCH_WORKSPACE_REPOSITORY} logsearch-workspace
+    git clone ${LOGSEARCH_WORKSPACE_REPOSITORY} logsearch-workspace
+    pushd logsearch-workspace
+    git checkout ${LOGSEARCH_WORKSPACE_BRANCH}
+    popd
   fi
 
   export X_ADMIN_PASS="$CF_ADMIN_PASS"
