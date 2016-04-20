@@ -58,11 +58,11 @@ variable "aws_ubuntu_ami" {
 }
 
 variable "hadoop_worker_count" {
-        default = "5"
+        default = "3"
 }
 
 variable "hadoop_instance_type" {
-        default = "m3.2xlarge"
+        default = "m3.xlarge"
 }
 
 variable "ansible_repo_path" {
