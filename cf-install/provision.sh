@@ -50,6 +50,8 @@ LOGSEARCH_WORKSPACE_REPOSITORY=${36}
 LOGSEARCH_WORKSPACE_BRANCH=${37}
 QUAY_USERNAME=${38}
 QUAY_PASS=${39}
+LOGSEARCH_DEPLOYMENT_SIZE=${40}
+PRIVATE_ROUTE_TABLE_ID=${41}
 
 BACKBONE_Z1_COUNT=COUNT
 API_Z1_COUNT=COUNT
@@ -242,7 +244,10 @@ fi
 popd
 
 if [[ ! -d 'cf-boshworkspace' ]]; then
-  git clone -b ${CF_BOSHWORKSPACE_BRANCH} ${CF_BOSHWORKSPACE_REPOSITORY} cf-boshworkspace
+  git clone ${CF_BOSHWORKSPACE_REPOSITORY} cf-boshworkspace
+  pushd cf-boshworkspace
+  git checkout ${CF_BOSHWORKSPACE_BRANCH}
+  popd
 fi
 
 pushd cf-boshworkspace
@@ -381,7 +386,10 @@ if [[ $INSTALL_DOCKER == "true" ]]; then
   cd ~/workspace/deployments
 
   if [[ ! -d 'docker-services-boshworkspace' ]]; then
-    git clone -b ${DOCKER_SERVICES_BOSHWORKSPACE_BRANCH} ${DOCKER_SERVICES_BOSHWORKSPACE_REPOSITORY} docker-services-boshworkspace
+    git clone ${DOCKER_SERVICES_BOSHWORKSPACE_REPOSITORY} docker-services-boshworkspace
+    pushd docker-services-boshworkspace
+    git checkout ${DOCKER_SERVICES_BOSHWORKSPACE_BRANCH}
+    popd
   fi
 
   echo "Update the docker-aws-vpc.yml with cf-boshworkspace parameters"
@@ -411,7 +419,13 @@ if [[ $INSTALL_DOCKER == "true" ]]; then
   echo "export DOCKER_HOST=tcp://${DOCKER_IP}:4243" | sudo tee -a /etc/profile.d/docker.sh
   sudo chmod +x /etc/profile.d/docker.sh
   source /etc/profile.d/docker.sh
-
+  
+  # add private images from QUAY
+  if [[ -n "$QUAY_USERNAME" ]] &&  [[ ! -f quay.patched ]]; then
+    patch -p1 <templates/quay.patch
+    touch quay.patched
+  fi
+  
   #list all images, convert to JSON, get the container image and tag with JQ
   DOCKER_IMAGES=$(cat templates/docker-properties.yml | ruby -ryaml -rjson -e "print JSON.dump(YAML.load(ARGF))" |\
     jq -r ".properties.broker.services[].plans[].container | [.image, .tag] | @sh" | sed "s/' '/:/;s/'//g")
@@ -433,6 +447,17 @@ if [[ $INSTALL_DOCKER == "true" ]]; then
   #now the deployment that will make persistent 
   #containers working
   bosh -n deploy
+
+  #install aws cli and configure it
+  sudo apt-get install awscli -y
+  export AWS_ACCESS_KEY_ID=$AWS_KEY_ID
+  export AWS_SECRET_ACCESS_KEY=$AWS_ACCESS_KEY
+  export AWS_DEFAULT_REGION=$REGION
+
+  #get docker instance id and add route
+  DOCKER_INSTANCE_ID=$(bosh instances --detail | sed -nr 's/.*docker.* (i-[a-zA-Z0-9]+) .*$/\1/p')
+  aws ec2 create-route --route-table-id $PRIVATE_ROUTE_TABLE_ID --destination-cidr-block 172.17.0.0/16 --instance-id $DOCKER_INSTANCE_ID
+  aws ec2 modify-instance-attribute --instance-id $DOCKER_INSTANCE_ID --source-dest-check "{\"Value\": false}"
 fi
 
 if [[ $INSTALL_LOGSEARCH == "true" ]]; then
@@ -441,7 +466,10 @@ if [[ $INSTALL_LOGSEARCH == "true" ]]; then
   cd ~/workspace/deployments
 
   if [[ ! -d 'logsearch-workspace' ]]; then
-    git clone -b ${LOGSEARCH_WORKSPACE_BRANCH} ${LOGSEARCH_WORKSPACE_REPOSITORY} logsearch-workspace
+    git clone ${LOGSEARCH_WORKSPACE_REPOSITORY} logsearch-workspace
+    pushd logsearch-workspace
+    git checkout ${LOGSEARCH_WORKSPACE_BRANCH}
+    popd
   fi
 
   export X_ADMIN_PASS="$CF_ADMIN_PASS"
@@ -451,7 +479,14 @@ if [[ $INSTALL_LOGSEARCH == "true" ]]; then
   export X_CF_DOMAIN="$CF_DOMAIN"
   export X_CLIENT_PASS="$CF_CLIENT_PASS"
   export X_DIRECTOR_UUID="$DIRECTOR_UUID"
-
+  X_LOGS_ORG="system"
+  X_LOGS_SPACE="elk-for-pcf"
+  X_LOGS_USER="admin"
+  X_LOGS_APP="logs"
+  X_LOGS_DOMAIN="https://api."$CF_DOMAIN
+  X_LOGS_INSTANCE="4"
+  X_LOGS_MEMORY="1G"
+  export PATH=$PATH:$HOME/bin/traveling-cf-admin
   cd "$HOME/workspace/deployments/logsearch-workspace"
   mkdir -p releases
   if [[ ! -d "releases/logsearch-for-cloudfoundry" ]]; then
@@ -464,10 +499,18 @@ if [[ $INSTALL_LOGSEARCH == "true" ]]; then
 
   bosh upload release https://bosh.io/d/github.com/logsearch/logsearch-boshrelease?v=23.0.0
 
-  python generate_template.py manifest-aws.yml.j2
+  if [[ $LOGSEARCH_DEPLOYMENT_SIZE == "medium" ]]; then
+    python generate_template.py manifest-aws.yml.j2
+  else
+    python generate_template.py manifest-aws-small.yml.j2
+  fi
 
   bosh -d manifest.yml -n deploy
   bosh -d manifest.yml -n run errand push-kibana
+
+  cf login -a $X_LOGS_DOMAIN -u $X_LOGS_USER -p $CF_ADMIN_PASS -o $X_LOGS_ORG -s $X_LOGS_SPACE --skip-ssl-validation
+  cf scale $X_LOGS_APP -i $X_LOGS_INSTANCE -m $X_LOGS_MEMORY -f
+
 fi
 
 echo "Provision script completed..."

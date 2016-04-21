@@ -73,6 +73,8 @@ assure_string_in_file $filename_provision 'LOGSEARCH_WORKSPACE_REPOSITORY=${36}'
 assure_string_in_file $filename_provision 'LOGSEARCH_WORKSPACE_BRANCH=${37}' "LOGSEARCH_WORKSPACE_BRANCH=\"$(terraform output -state="${state_file}" logsearch_workspace_branch)\""
 assure_string_in_file $filename_provision 'QUAY_USERNAME=${38}' "QUAY_USERNAME=\"$(terraform output -state="${state_file}" quay_username)\""
 assure_string_in_file $filename_provision 'QUAY_PASS=${39}' "QUAY_PASS=\"$(terraform output -state="${state_file}" quay_pass)\""
+assure_string_in_file $filename_provision 'LOGSEARCH_DEPLOYMENT_SIZE=${40}' "LOGSEARCH_DEPLOYMENT_SIZE=\"$(terraform output -state="${state_file}" logsearch_deployment_size)\""
+assure_string_in_file $filename_provision 'PRIVATE_ROUTE_TABLE_ID=${41}' "PRIVATE_ROUTE_TABLE_ID=\"$(terraform output -state="${state_file}" aws_route_table_private_id)\""
 
 for job in BACKBONE API SERVICES HEALTH RUNNER; do
 	for zone in Z1 Z2; do

@@ -58,11 +58,11 @@ variable "aws_ubuntu_ami" {
 }
 
 variable "hadoop_worker_count" {
-        default = "5"
+        default = "3"
 }
 
 variable "hadoop_instance_type" {
-        default = "m3.2xlarge"
+        default = "m3.xlarge"
 }
 
 variable "ansible_repo_path" {
@@ -74,7 +74,11 @@ variable "install_docker_services" {
 }
 
 variable "install_logsearch" {
-  default = "false"
+  default = "true"
+}
+
+variable "logsearch_deployment_size" {
+  default = "small"
 }
 
 variable "cf_size" {
