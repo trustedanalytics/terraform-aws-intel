@@ -449,7 +449,8 @@ if [[ $INSTALL_DOCKER == "true" ]]; then
   bosh -n deploy
 
   #install aws cli and configure it
-  sudo apt-get install awscli -y
+  sudo apt-get install python-pip -y
+  sudo pip install awscli==1.10.22
   export AWS_ACCESS_KEY_ID=$AWS_KEY_ID
   export AWS_SECRET_ACCESS_KEY=$AWS_ACCESS_KEY
   export AWS_DEFAULT_REGION=$REGION
